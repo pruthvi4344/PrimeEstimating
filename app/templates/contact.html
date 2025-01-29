@@ -1,0 +1,555 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prime Estimating - Contact</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baskervville:ital@0;1&family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=Gilda+Display&family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&family=Pridi:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+ 
+
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Global and Shared Styles */
+    html {
+    scroll-behavior: smooth;
+}
+/* Global Styles */
+body {
+  /* font-family: 'Roboto', sans-serif; */
+  font-family: 'Gilda Display', serif;
+
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+h1, h2, h3 {
+  font-family: "Merriweather", serif;
+  font-weight: 700;
+}
+p{
+  font-family: "Merriweather", serif;
+}
+a {
+  text-decoration: none;
+  font-family: "Merriweather", serif;
+  color: #0D67B5;
+}
+    /* Add these styles to your existing CSS */
+    .top-contact-info {
+      background-color: #0B5292;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      color: white;
+      font-size: 14px;
+      position: sticky;
+      top: 0;
+      z-index: 200; /* Ensure it's above other elements */
+      /* width: 100%; */
+    }
+
+
+    .contact-details {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .contact-details a {
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .contact-details i {
+      font-size: 16px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .top-contact-info {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+        padding: 10px;
+        height: auto;
+        position: sticky; /* Reset for mobile */
+      }
+
+      header {
+        top: 0; /* Reset for mobile */
+      }
+
+      .contact-details {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+
+.btn {
+  display: inline-block;
+  background-color: #0D67B5;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #0B5292;
+}
+
+/* Header Styles */
+header {
+  background-color: #0D67B5;
+  padding: 20px;
+  position: sticky;
+  top: 37px;
+  z-index: 100;
+}
+
+@media (max-width: 768px) {
+  header {
+    top: 62.5px;
+  }
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo h1 {
+  color: #fff;
+  margin: 0;
+  font-size: 24px;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  margin-left: 30px;
+}
+
+nav a {
+  color: #fff;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #d9d9d9;
+}
+
+
+   /* Services Hero */
+   .contact-hero  {
+      background-image: url('{{contactmanagedetails.background_image.url}}');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 100px 15px;
+      height:315px ;
+      position: relative;
+    }
+
+    .contact-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(13, 103, 181, 0.7);
+    }
+
+    .contact-hero-content {
+      position: relative;
+      z-index: 10;
+      max-width: 800px;
+      margin: 0 auto;
+      /* animation: slideIn 1.2s ease-out; */
+    }
+
+    .contact-hero  h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      /* animation: slideIn 1s ease-out; */
+    }
+
+    .contact-hero  p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      /* animation: slideIn 1s ease-out; */
+    }
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px); /* Start slightly below */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0); /* End in the original position */
+    }
+}
+
+    /* Contact Information Section */
+    .contact-section {
+      display: flex;
+      max-width: 1200px;
+      margin: 50px auto;
+      padding: 0 15px;
+      gap: 50px;
+    }
+
+    .contact-info, .contact-process {
+      flex: 1;
+      background-color: #f8f8f8;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-detail {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      gap: 15px;
+    }
+
+    .contact-detail i {
+      color: #0D67B5;
+      font-size: 24px;
+      width: 40px;
+      text-align: center;
+    }
+
+    .contact-process h2 {
+      color: #0D67B5;
+      margin-bottom: 20px;
+    }
+
+    .contact-steps {
+      list-style-type: none;
+    }
+
+    .contact-steps li {
+      margin-bottom: 15px;
+      padding: 10px;
+      background-color: white;
+      border-left: 4px solid #0D67B5;
+      transition: transform 0.3s ease;
+    }
+
+    .contact-steps li:hover {
+      transform: translateX(10px);
+    }
+
+    /* Form Styles */
+    .contact-form {
+      margin-top: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    .submit-btn {
+      background-color: #0D67B5;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background-color: #0B5292;
+    }
+
+    /* Hamburger Menu and Responsive Styles */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+      z-index: 101;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background-color: #fff;
+      transition: all 0.3s ease;
+    }
+
+    /* Media Queries for Responsiveness */
+    @media (max-width: 768px) {
+      .contact-section {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .contact-hero h1 {
+        font-size: 1.8rem;
+      }
+
+      .contact-hero p {
+        font-size: 1rem;
+      }
+
+      .contact-info, .contact-process {
+        padding: 20px;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 68px;
+        right: 6px;
+        width: 134px;
+        background-color: #0D67B5;
+        border-radius: 8px;
+        align-items: center;
+        padding: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 100;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-links li {
+        margin: 10px 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .contact-hero {
+        height: auto;
+        padding: 60px 15px;
+      }
+
+      .contact-detail {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+    .call-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #0D67B5;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.phone-icon {
+    color: white;
+    font-size: 24px;
+    animation: shake 1s ease-in-out infinite;
+}
+
+@keyframes shake {
+    0%, 100% { 
+        transform: rotate(0deg); 
+    }
+    20% { 
+        transform: rotate(-8deg); 
+    }
+    40% { 
+        transform: rotate(8deg); 
+    }
+    60% { 
+        transform: rotate(-4deg); 
+    }
+    80% { 
+        transform: rotate(4deg); 
+    }
+}
+
+.call-btn:hover {
+    background-color: #0956a3;
+}
+
+/* Optional: Pause animation on hover */
+.call-btn:hover .phone-icon {
+    animation-play-state: paused;
+}
+  </style>
+</head>
+<body>
+  <!-- Top Contact Info and Header (Same as Previous) -->
+  <div class="top-contact-info">
+    <div class="contact-details">
+      <a href="tel:{{contactdetails.contnum}}">
+        <i class="fas fa-phone"></i>
+        {{contactdetails.contnum}}
+      </a>
+      <a href="mailto:{{contactdetails.email}}">
+        <i class="fas fa-envelope"></i>
+        {{contactdetails.email}}
+      </a>
+    </div>
+  </div>
+
+  <header>
+    <nav>
+      <div class="logo">
+        <h1>Prime Estimating</h1>
+      </div>
+      
+      <ul class="nav-links">
+        <li><a href="{% url 'home'%}">Home</a></li>
+        <li><a href="{% url 'services'%}">Services</a></li>
+        <!-- <li><a href="#portfolio">Portfolio</a></li> -->
+        <li><a href="{% url 'about'%}">About</a></li>
+        <li><a href="{% url 'contact'%}">Contact</a></li>
+      </ul>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Contact Hero Section (Same as Previous) -->
+  <section class="contact-hero">
+    <div class="contact-hero-content">
+      <!-- <h1>Get In Touch</h1>
+      <p>We're here to answer your questions, discuss your project needs, and provide expert construction estimating solutions.</p>
+      <a href="#contact-sec" class="btn">Connect with us</a> -->
+      <h1 data-aos="fade-right"  data-aos-duration="2000">{{contactmanagedetails.title}}</h1>
+      <p data-aos="fade-left"  data-aos-duration="2000">{{contactmanagedetails.line}}</p>
+      <a data-aos="fade-down"  data-aos-duration="2000" href="#contact-sec" class="btn">{{contactmanagedetails.button_text}}</a>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact-section" id="contact-sec">
+    <div class="contact-info">
+      <h2>Contact Information</h2>
+      
+      <div class="contact-detail">
+        <i class="fas fa-map-marker-alt"></i>
+        <div>
+          <strong>Address</strong>
+          <p>{{contactdetails.address}}</p>
+        </div>
+      </div>
+      
+      <div class="contact-detail">
+        <i class="fas fa-phone"></i>
+        <div>
+          <strong>Phone</strong>
+          <p>{{contactdetails.contnum}}</p>
+        </div>
+      </div>
+      
+      <div class="contact-detail">
+        <i class="fas fa-envelope"></i>
+        <div>
+          <strong>Email</strong>
+          <p>{{contactdetails.email}}</p>
+        </div>
+      </div>
+      
+      <div class="contact-detail">
+        <i class="fas fa-clock"></i>
+        <div>
+          <strong>Business Hours</strong>
+          <p>{{contactdetails.timing}}</p>
+        </div>
+      </div>
+
+      <form class="contact-form" id="contactForm">
+        <div class="form-group">
+          <input type="text" placeholder="Your Name" required>
+        </div>
+        <div class="form-group">
+          <input type="email" placeholder="Your Email" required>
+        </div>
+        <div class="form-group">
+          <textarea placeholder="Your Message" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
+    </div>
+
+    <div class="contact-process">
+      <h2>How We Contact You</h2>
+      <ul class="contact-steps">
+        <li>Initial Consultation: We review your project details within 24 hours</li>
+        <li>Project Assessment: Our team analyzes your specific requirements</li>
+        <li>Custom Proposal: We develop a tailored estimating solution</li>
+        <li>Detailed Communication: We schedule a comprehensive discussion</li>
+        <li>Ongoing Support: We provide continuous project guidance</li>
+      </ul>
+    </div>
+  </section>
+  <a href="tel:{{contactdetails.contnum}}">
+    <button class="call-btn" >
+      <i class="fas fa-phone phone-icon"></i>
+  </button>
+</a>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+    // Hamburger Menu Toggle
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+
+    // Form Submission Handling
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Thank you for your message! We will get back to you soon.');
+      this.reset();
+    });
+  </script>
+</body>
+</html>

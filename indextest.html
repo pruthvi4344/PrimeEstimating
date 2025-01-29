@@ -1,0 +1,351 @@
+
+
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prime Estimating - Construction Cost Experts</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gilda+Display&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+  <!-- Animation Libraries -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <style>
+    /* Enhanced Styles */
+    :root {
+      --primary-blue: #0D67B5;
+      --dark-blue: #0B5292;
+      --accent-yellow: #FFD700;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      color: #333;
+      background-color: #f9f9f9;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Gilda Display', serif;
+      letter-spacing: -0.03em;
+    }
+
+    /* Animated Header */
+    header {
+      background: var(--primary-blue);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+    }
+
+    .logo h1 {
+      font-size: 2rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      background: linear-gradient(45deg, #fff, var(--accent-yellow));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, rgba(13,103,181,0.9), rgba(11,82,146,0.9));
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: white;
+      transform: translateY(30px);
+      opacity: 0;
+      animation: heroEntrance 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    }
+
+    @keyframes heroEntrance {
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      text-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Services Section */
+    .service-grid {
+      display: grid;
+      gap: 2rem;
+      padding: 4rem 2rem;
+    }
+
+    .service-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+      transform-style: preserve-3d;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+      box-shadow: 0 25px 40px rgba(0,0,0,0.15);
+    }
+
+    /* Project Cards */
+    .project-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .project-card img {
+      transition: transform 0.5s ease;
+    }
+
+    .project-card:hover img {
+      transform: scale(1.1);
+    }
+
+    /* Contact Form */
+    .contact-form input,
+    .contact-form textarea {
+      transition: all 0.3s ease;
+      border: 2px solid #ddd !important;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: var(--primary-blue) !important;
+      box-shadow: 0 4px 15px rgba(13, 103, 181, 0.2);
+    }
+
+    /* Animated Call Button */
+    .call-btn {
+      animation: pulse 2s infinite;
+      background: linear-gradient(45deg, var(--primary-blue), var(--dark-blue));
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(13, 103, 181, 0.5); }
+      70% { box-shadow: 0 0 0 15px rgba(13, 103, 181, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(13, 103, 181, 0); }
+    }
+
+    /* Add other existing styles here... */
+  </style>
+</head>
+<body>
+  <!-- Top Contact Bar -->
+  <div class="top-contact-info" data-aos="fade-down">
+    <div class="contact-details">
+      <a href="tel:{{contactdetails.contnum}}">
+        <i class="fas fa-phone"></i>
+        {{contactdetails.contnum}}
+      </a>
+      <a href="mailto:{{contactdetails.email}}">
+        <i class="fas fa-envelope"></i>
+        {{contactdetails.email}}
+      </a>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header data-aos="fade-down">
+    <nav>
+      <div class="logo">
+        <h1>Prime Estimating</h1>
+      </div>
+      <ul class="nav-links">
+        <li><a href="{% url 'home'%}" data-aos="zoom-in">Home</a></li>
+        <li><a href="{% url 'services'%}" data-aos="zoom-in" data-aos-delay="100">Services</a></li>
+        <li><a href="{% url 'about'%}" data-aos="zoom-in" data-aos-delay="200">About</a></li>
+        <li><a href="{% url 'contact'%}" data-aos="zoom-in" data-aos-delay="300">Contact</a></li>
+      </ul>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Section -->
+    <section class="hero" style="background-image: url('{{indexmanagedetails.background_image.url}}')">
+      <div class="hero-content">
+        <h1 data-aos="zoom-in">{{indexmanagedetails.title}}</h1>
+        <p data-aos="fade-up" data-aos-delay="200">{{indexmanagedetails.line}}</p>
+        <a href="#contact" class="btn" data-aos="zoom-in" data-aos-delay="400">{{indexmanagedetails.button_text}}</a>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+      <h2 data-aos="fade-up">Our Services</h2>
+      <div class="service-grid">
+        {% for servicesdetail in servicesdetails %}
+        <div class="service-card" data-aos="flip-up">
+          <h3>{{servicesdetail.name}}</h3>
+          <p>{{servicesdetail.detail}}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="portfolio">
+      <h2 data-aos="fade-up">Our Projects</h2>
+      <div class="project-grid">
+        {% for project in projects %}
+        <div class="project-card" data-aos="zoom-in">
+          <img src="{% static 'images/project.jpg' %}" alt="{{project.title}}">
+          <div class="project-info">
+            <h3>{{project.title}}</h3>
+            <p>{{project.description}}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+      <div class="about-content" data-aos="fade-right">
+        <div class="about-image" data-aos="zoom-in">
+          <img src="{% static 'images/about.jpg' %}" alt="Our Team">
+        </div>
+        <div class="about-text" data-aos="fade-left">
+          <h2>About Us</h2>
+          <p>{{about_content}}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <h2 data-aos="fade-up">Get In Touch</h2>
+      <form class="contact-form" data-aos="zoom-in">
+        <!-- Form fields here -->
+      </form>
+    </section>
+
+    <!-- Floating Call Button -->
+    <a href="tel:{{contactdetails.contnum}}" class="call-btn">
+      <i class="fas fa-phone phone-icon"></i>
+    </a>
+  </main>
+
+  <!-- Footer -->
+  <footer data-aos="fade-up">
+    <!-- Footer content -->
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    // Initialize AOS
+    AOS.init({
+      duration: 1000,
+      once: true,
+      easing: 'ease-out-cubic'
+    });
+
+    // GSAP Animations
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Animate service cards
+    gsap.from(".service-card", {
+      scrollTrigger: {
+        trigger: "#services",
+        start: "top center"
+      },
+      duration: 1,
+      y: 100,
+      opacity: 0,
+      stagger: 0.2,
+      ease: "power4.out"
+    });
+
+    // Project card hover effect
+    document.querySelectorAll('.project-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        gsap.to(card, {
+          x: (x - rect.width/2) / 15,
+          y: (y - rect.height/2) / 15,
+          rotationX: -(y - rect.height/2) / 10,
+          rotationY: (x - rect.width/2) / 10,
+          ease: "power2.out",
+          duration: 0.3
+        });
+      });
+
+      card.addEventListener('mouseleave', () => {
+        gsap.to(card, {
+          x: 0,
+          y: 0,
+          rotationX: 0,
+          rotationY: 0,
+          ease: "power2.out",
+          duration: 0.5
+        });
+      });
+    });
+
+    // Hamburger Menu
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>

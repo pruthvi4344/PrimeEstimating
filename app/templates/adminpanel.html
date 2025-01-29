@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Estimation Admin Panel</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0D67B5;
+            --secondary-color: #FFFFFF;
+            --text-color: #333;
+            --hover-color: #0A4F8D;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            background-color: #f4f4f4;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: var(--primary-color);
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            transition: width 0.3s;
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background-color: var(--hover-color);
+            color: var(--secondary-color);
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 20px 0;
+        }
+
+        .sidebar-menu li {
+            padding: 10px 20px;
+            transition: background 0.3s;
+        }
+
+        .sidebar-menu li:hover {
+            background-color: var(--hover-color);
+        }
+
+        .sidebar-menu a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            width: calc(100% - 250px);
+            padding: 20px;
+            transition: margin-left 0.3s;
+        }
+
+        .card {
+            background-color: var(--secondary-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--text-color);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background-color: var(--hover-color);
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 70px;
+            }
+
+            .sidebar-menu span {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 70px;
+                width: calc(100% - 70px);
+            }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--secondary-color);
+            padding: 20px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+        }
+                /* Table Styles */
+                .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .data-table th,
+        .data-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .data-table th {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+        }
+        #toast {
+          background-color: var(--primary-color);
+          color: var(--secondary-color);
+          padding: 15px;
+          border-radius: 4px;
+          position: fixed;
+          right: 20px;
+          top: 20px;
+          box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          border-left: 4px solid #22c55e;
+          animation: slideIn 0.5s ease-out;
+          /* Add these properties to ensure it stays on top */
+          z-index: 9999;
+          pointer-events: none; /* This allows clicking through the toast */
+      }
+
+      .checkmark {
+          background-color: #22c55e;
+          color: white;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
+
+      @keyframes slideIn {
+          from {
+              transform: translateX(100%);
+          }
+          to {
+              transform: translateX(0);
+          }
+      }
+      .sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #0D67B5;
+    position: fixed;
+    left: 0;
+    top: 0;
+    transition: 0.3s;
+}
+
+.sidebar-logo {
+    padding: 20px;
+    text-align: center;
+}
+
+
+
+
+
+.hamburger {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    background-color: #0D67B5;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Mobile Styles */
+@media screen and (max-width: 700px) {
+    .hamburger {
+        display: block;
+    }
+
+    .sidebar {
+        left: -250px;
+    }
+
+    .sidebar.active {
+        left: 0;
+    }
+}
+    </style>
+</head>
+<body>
+<!-- Add hamburger button before sidebar -->
+<div class="hamburger">
+    <i class="fas fa-bars"></i>
+</div>
+
+<div class="sidebar">
+    <div class="sidebar-logo">
+        <h2>Prime Estimation</h2>
+    </div>
+    <ul class="sidebar-menu">
+        <li><a href="#" onclick="showSection('home')"><i class="fas fa-home"></i> <span>Home</span></a></li>
+        <li><a href="#" onclick="showSection('services')"><i class="fas fa-cogs"></i> <span>Services</span></a></li>
+        <li><a href="#" onclick="showSection('about')"><i class="fas fa-info-circle"></i> <span>About</span></a></li>
+        <li><a href="#" onclick="showSection('contact')"><i class="fas fa-envelope"></i> <span>Contact</span></a></li>
+        <li><a href="#" onclick="showSection('indexmanage')"><i class="fas fa-home"></i> <span>Index welcome Manage</span></a></li>
+        <li><a href="#" onclick="showSection('servicemanage')"><i class="fas fa-tasks"></i> <span>Service welcome Manage</span></a></li>
+        <li><a href="#" onclick="showSection('aboutmanage')"><i class="fas fa-info-circle"></i> <span>About welcome Manage</span></a></li>
+        <li><a href="#" onclick="showSection('contactmanage')"><i class="fas fa-user"></i> <span>Contact welcome Manage</span></a></li>
+        <li><a href="{%url 'admin_logout'%}" onclick="return confirm('Are you sure you want to logout?');"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a></li>
+    </ul>
+</div>
+
+    <!-- notifications -->
+    {% for message in messages %}
+    <div id="toast">
+        <span>{{message}}</span>
+    </div>    
+    {% endfor %}
+
+    <script>
+        setTimeout(function() {
+            document.getElementById("toast").style.display = "none";
+        }, 3000);
+    </script>
+    <div class="main-content">
+        <div id="home" class="section card">
+            <h1>Dashboard</h1>
+            <p>Welcome to Prime Estimation Admin Panel</p>
+        </div>
+
+        <div id="services" class="section card" style="display:none;">
+            <h2>Services Management</h2>
+            <form id="serviceForm"  method="POST">
+                {%csrf_token%}
+                <input type="hidden" name="form_type" value="service_form">
+                <div class="form-group">
+                    <label>Service Title</label>
+                    <input type="text" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea name="detail" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Font Awesome Icon Class</label>
+                    <input type="text" name="icon_class" placeholder="e.g., fas fa-list-alt">
+                </div>
+                <button type="submit" class="btn">Save Service</button>
+            </form>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Service Emoji</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for servicesdetail in servicesdetails%}
+                    <tr>
+                        <td>{{servicesdetail.name}}</td>
+                        <td>{{servicesdetail.detail|truncatechars:110}}</td>
+                        <td>{{servicesdetail.icon_class}}</td>
+                        <td>
+                            <a href="{% url 'edit_service' servicesdetail.id %}" ><button class="btn">Edit</button></a>
+                            <a href="{% url 'delete_service' servicesdetail.id %}" onclick="return confirm('Are you sure you want to delete this service?');">
+                                <button class="btn">Delete</button>
+                            </a>
+                        </td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+
+        <div id="about" class="section card" style="display:none;">
+            <h2>About Management</h2>
+            <form id="aboutForm" method="POST">
+                {%csrf_token%}
+                <input type="hidden" name="form_type" value="about_form">
+                <div class="form-group">
+                    <label>Company Story</label>
+                    <textarea name="story" required></textarea>
+                </div>
+                <button type="submit" class="btn">Update About</button>
+            </form>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Story</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{aboutdetails.story}}</td>
+                        <td>
+                            <a href="{% url 'edit_about' %}" ><button class="btn">Edit</button></a>
+                            <button class="btn">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <div id="contact" class="section card" style="display:none;">
+            <h2>Contact Management</h2>
+            <form id="contactForm" method="POST">
+                {%csrf_token%}
+                <input type="hidden" name="form_type" value="contact_form">
+                <div class="form-group">
+                    <label>Address</label>
+                    <input type="text" name="address" required>
+                </div>
+                <div class="form-group">
+                    <label>Contact Email</label>
+                    <input type="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Business hours</label>
+                    <input type="text" name="time" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" name="phone" required>
+                </div>
+                <button type="submit" class="btn">Update Contact</button>
+            </form>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Timing</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        <td>{{contactdetails.email}}</td>
+                        <td>{{contactdetails.contnum}}</td>
+                        <td>{{contactdetails.address}}</td>
+                        <td>{{contactdetails.timing}}</td>
+                        
+                        <td>
+                            <a href="{% url 'edit_contact'  %}" style="text-decoration: none;" > <button class="btn">Edit</button> </a>
+                            <a href="{% url 'delete_contact' %}"  onclick="return confirm('Are you sure you want to delete this contact?');"><button class="btn">Delete</button></a>
+                        </td>
+                    </tr>
+                   
+                </tbody>
+            </table>
+        </div>
+        <!-- index welcome manage  -->
+        <div id="indexmanage" class="section card" style="display:none;">
+            <h2>Home Page Management</h2>
+            <form id="contactForm" method="POST" enctype="multipart/form-data">
+                {%csrf_token%}
+                <input type="hidden" name="form_type" value="indexmanage_form">
+                <div class="form-group">
+                    <label>Welcome title</label>
+                    <input type="text" name="wtitle" required>
+                </div>
+                <div class="form-group">
+                    <label>Welcome Line</label>
+                    <input type="text" name="wline" required>
+                </div>
+                <div class="form-group">
+                    <label>Welcome button Name</label>
+                    <input type="text" name="wbtn" required>
+                </div>
+                <div class="form-group">
+                    <label>Welcome Background Image</label>
+                    <input type="file" name="wimg" required>
+                </div>
+                <button type="submit" class="btn">Save</button>
+            </form>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Line</th>
+                        <th>Button text</th>
+                        <th>Bg Image</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        <td>{{indexmanagedetails.title}}</td>
+                        <td>{{indexmanagedetails.line}}</td>
+                        <td>{{indexmanagedetails.button_text}}</td>
+                        <td><img src="{{ indexmanagedetails.background_image.url }}" alt="Current Image" style="width: 150px; height: auto; display: block;"></td>
+                        
+                        <td>
+                            <a href="{% url 'edit_indexmanage' %}" style="text-decoration: none;" > <button class="btn">Edit</button> </a>
+                            <a href="{% url 'delete_indexmanage' %}"  onclick="return confirm('Are you sure you want to delete this contact?');"><button class="btn">Delete</button></a>
+                        </td>
+                    </tr>
+                   
+                </tbody>
+            </table>
+        </div>
+
+        <!-- service welcome manage  -->
+        <div id="servicemanage" class="section card" style="display:none;">
+            <h2>Service Page Management</h2>
+            <form id="contactForm" method="POST" enctype="multipart/form-data">
+                {%csrf_token%}
+                <input type="hidden" name="form_type" value="servicemanage_form">
+                <div class="form-group">
+                    <label>Welcome title</label>
+                    <input type="text" name="wtitle" required>
+                </div>
+                <div class="form-group">
+                    <label>Welcome Line</label>
+                    <input type="text" name="wline" required>
+                </div>
+                <div class="form-group">
+                    <label>Welcome button Name</label>
+                    <input type="text" name="wbtn" required>
+                </div>
+                <div class="form-group">
+                    <label>Welcome Background Image</label>
+                    <input type="file" name="wimg" required>
+                </div>
+                <button type="submit" class="btn">Save</button>
+            </form>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Line</th>
+                        <th>Button text</th>
+                        <th>Bg Image</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        <td>{{servicemanagedetails.title}}</td>
+                        <td>{{servicemanagedetails.line}}</td>
+                        <td>{{servicemanagedetails.button_text}}</td>
+                        <td><img src="{{ servicemanagedetails.background_image.url }}" alt="Current Image" style="width: 150px; height: auto; display: block;"></td>
+                        
+                        <td>
+                            <a href="{% url 'edit_servicemanage' %}" style="text-decoration: none;" > <button class="btn">Edit</button> </a>
+                            <a href="{% url 'delete_servicemanage' %}"  onclick="return confirm('Are you sure you want to delete this contact?');"><button class="btn">Delete</button></a>
+                        </td>
+                    </tr>
+                   
+                </tbody>
+            </table>
+        </div>
+         <!-- about welcome manage -->
+         <div id="aboutmanage" class="section card" style="display:none;">
+            <h2>About Page Management</h2>
+            <form id="contactForm" method="POST" enctype="multipart/form-data">
+                {%csrf_token%}
+                <input type="hidden" name="form_type" value="aboutmanage_form">
+                <div class="form-group">
+                    <label>Welcome title</label>
+                    <input type="text" name="wtitle" required>
+                </div>
+                <div class="form-group">
+                    <label>Welcome Line</label>
+                    <input type="text" name="wline" required>
+                </div>
+                <div class="form-group">
+                    <label>Welcome button Name</label>
+                    <input type="text" name="wbtn" required>
+                </div>
+                <div class="form-group">
+                    <label>Welcome Background Image</label>
+                    <input type="file" name="wimg" required>
+                </div>
+                <button type="submit" class="btn">Save</button>
+            </form>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Line</th>
+                        <th>Button text</th>
+                        <th>Bg Image</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        <td>{{aboutmanagedetails.title}}</td>
+                        <td>{{aboutmanagedetails.line}}</td>
+                        <td>{{aboutmanagedetails.button_text}}</td>
+                        <td><img src="{{ aboutmanagedetails.background_image.url }}" alt="Current Image" style="width: 150px; height: auto; display: block;"></td>
+                        
+                        <td>
+                            <a href="{% url 'edit_aboutmanage' %}" style="text-decoration: none;" > <button class="btn">Edit</button> </a>
+                            <a href="{% url 'delete_aboutmanage' %}"  onclick="return confirm('Are you sure you want to delete this contact?');"><button class="btn">Delete</button></a>
+                        </td>
+                    </tr>
+                   
+                </tbody>
+            </table>
+        </div>  
+          <!-- contact welcome manage  -->
+          <div id="contactmanage" class="section card" style="display:none;">
+            <h2>Contact Page Management</h2>
+            <form id="contactForm" method="POST" enctype="multipart/form-data">
+                {%csrf_token%}
+                <input type="hidden" name="form_type" value="contactmanage_form">
+                <div class="form-group">
+                    <label>Welcome title</label>
+                    <input type="text" name="wtitle" required>
+                </div>
+                <div class="form-group">
+                    <label>Welcome Line</label>
+                    <input type="text" name="wline" required>
+                </div>
+                <div class="form-group">
+                    <label>Welcome button Name</label>
+                    <input type="text" name="wbtn" required>
+                </div>
+                <div class="form-group">
+                    <label>Welcome Background Image</label>
+                    <input type="file" name="wimg" required>
+                </div>
+                <button type="submit" class="btn">Save</button>
+            </form>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Line</th>
+                        <th>Button text</th>
+                        <th>Bg Image</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        <td>{{contactmanagedetails.title}}</td>
+                        <td>{{contactmanagedetails.line}}</td>
+                        <td>{{contactmanagedetails.button_text}}</td>
+                        <td><img src="{{ contactmanagedetails.background_image.url }}" alt="Current Image" style="width: 150px; height: auto; display: block;"></td>
+                        
+                        <td>
+                            <a href="{% url 'edit_contactmanage' %}" style="text-decoration: none;" > <button class="btn">Edit</button> </a>
+                            <a href="{% url 'delete_contactmanage' %}"  onclick="return confirm('Are you sure you want to delete this contact?');"><button class="btn">Delete</button></a>
+                        </td>
+                    </tr>
+                   
+                </tbody>
+            </table>
+        </div>   
+    </div>
+
+    <div id="logoutModal" class="modal">
+        <div class="modal-content">
+            <h2>Logout</h2>
+            <form id="logoutForm">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" name="password" required>
+                </div>
+                <button type="submit" class="btn">Logout</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+
+
+        // Warn the user before session expiration
+        const warningTime = 25 * 60 * 1000; // 25 minutes in milliseconds
+        const logoutTime = 30 * 60 * 1000; // 30 minutes in milliseconds
+    
+        setTimeout(() => {
+            alert('Your session will expire in 5 minutes. Please save your work!');
+        }, warningTime);
+    
+        setTimeout(() => {
+            alert('Your session has expired. You will be logged out.');
+            window.location.href = "{% url 'admin_logout' %}"; // Redirect to logout
+        }, logoutTime);
+    
+
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.style.display = 'none';
+            });
+
+            // Show selected section
+            document.getElementById(sectionId).style.display = 'block';
+        }
+
+        // function showLogoutModal() {
+        //     document.getElementById('logoutModal').style.display = 'flex';
+        // }
+
+        // // Simple form submission handlers (replace with actual backend logic)
+        // document.getElementById('serviceForm').addEventListener('submit', function(e) {
+        //     e.preventDefault();
+        //     alert('Service saved successfully!');
+        // });
+
+        // document.getElementById('aboutForm').addEventListener('submit', function(e) {
+        //     e.preventDefault();
+        //     alert('About section updated successfully!');
+        // });
+
+        // document.getElementById('contactForm').addEventListener('submit', function(e) {
+        //     e.preventDefault();
+        //     alert('Contact information updated successfully!');
+        // });
+
+        // document.getElementById('logoutForm').addEventListener('submit', function(e) {
+        //     e.preventDefault();
+        //     alert('Logout successful!');
+        //     document.getElementById('logoutModal').style.display = 'none';
+        // });
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('logoutModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Add this JavaScript
+const hamburger = document.querySelector('.hamburger');
+const sidebar = document.querySelector('.sidebar');
+
+hamburger.addEventListener('click', () => {
+    sidebar.classList.toggle('active');
+});
+
+// Optional: Close sidebar when clicking outside
+document.addEventListener('click', (e) => {
+    if (!sidebar.contains(e.target) && !hamburger.contains(e.target)) {
+        sidebar.classList.remove('active');
+    }
+});
+    </script>
+</body>
+</html>

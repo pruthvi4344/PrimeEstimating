@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0D67B5;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header h1 {
+            color: #0D67B5;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e1e1;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #0D67B5;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background-color: #0D67B5;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background-color: #0956a3;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 20px;
+                margin: 20px;
+            }
+        }
+        #toast {
+          background-color: white;
+          color: #0956a3;
+          padding: 15px;
+          border-radius: 4px;
+          position: fixed;
+          right: 20px;
+          top: 20px;
+          box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          border-left: 4px solid #22c55e;
+          animation: slideIn 0.5s ease-out;
+          /* Add these properties to ensure it stays on top */
+          z-index: 9999;
+          pointer-events: none; /* This allows clicking through the toast */
+      }
+
+      .checkmark {
+          background-color: #22c55e;
+          color: white;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
+
+      @keyframes slideIn {
+          from {
+              transform: translateX(100%);
+          }
+          to {
+              transform: translateX(0);
+          }
+      }
+
+    </style>
+</head>
+<body>
+        <!-- notifications -->
+        {% for message in messages %}
+        <div id="toast">
+            <span>{{message}}</span>
+        </div>    
+        {% endfor %}
+    
+        <script>
+            setTimeout(function() {
+                document.getElementById("toast").style.display = "none";
+            }, 3000);
+        </script>
+    <div class="login-container">
+        <div class="login-header">
+            <h1>Admin Login</h1>
+        </div>
+        <form method="POST" action="{% url 'admin_login' %}">
+            {%csrf_token%}
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="email" id="username" name="username" placeholder="Enter your username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+    </div>
+</body>
+</html>

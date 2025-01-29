@@ -1,0 +1,550 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prime Estimating - Services</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    html {
+    scroll-behavior: smooth;
+}
+/* Global Styles */
+body {
+  /* font-family: 'Roboto', sans-serif; */
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+h1, h2, h3 {
+  /* font-family: 'Playfair Display', serif; */
+  font-weight: 700;
+}
+
+a {
+  text-decoration: none;
+  color: #0D67B5;
+}
+    /* Add these styles to your existing CSS */
+    .top-contact-info {
+      background-color: #0B5292;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      color: white;
+      font-size: 14px;
+      position: sticky;
+      top: 0;
+      z-index: 200; /* Ensure it's above other elements */
+      /* width: 100%; */
+    }
+
+
+    .contact-details {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .contact-details a {
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .contact-details i {
+      font-size: 16px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .top-contact-info {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+        padding: 10px;
+        height: auto;
+        position: sticky; /* Reset for mobile */
+      }
+
+      header {
+        top: 0; /* Reset for mobile */
+      }
+
+      .contact-details {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+
+.btn {
+  display: inline-block;
+  background-color: #0D67B5;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #0B5292;
+}
+
+/* Header Styles */
+header {
+  background-color: #0D67B5;
+  padding: 20px;
+  position: sticky;
+  top: 37px;
+  z-index: 100;
+}
+
+@media (max-width: 768px) {
+  header {
+    top: 62.5px;
+  }
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo h1 {
+  color: #fff;
+  margin: 0;
+  font-size: 24px;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  margin-left: 30px;
+}
+
+nav a {
+  color: #fff;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #d9d9d9;
+}
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px); /* Start slightly below */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0); /* End in the original position */
+    }
+}
+    /* Services Hero */
+    .services-hero {
+      background-image: url('{{ servicemanagedetails.background_image.url }}');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 100px 15px;
+      position: relative;
+      height:315px ;
+      
+    }
+
+    .services-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(13, 103, 181, 0.7);
+    }
+
+    .services-hero-content {
+      position: relative;
+      z-index: 10;
+      max-width: 800px;
+      margin: 0 auto;
+      animation: slideIn 1.2s ease-out;
+    }
+
+    .services-hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      animation: slideIn 1s ease-out;
+    }
+
+    .services-hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      animation: slideIn 1s ease-out;
+    }
+
+    /* Detailed Services */
+    .detailed-services {
+      padding: 50px 15px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .service-detail {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #f8f8f8;
+      border-radius: 8px;
+      margin-bottom: 30px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* .service-icon {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+      background-color: #0D67B5;
+      color: white;
+    } */
+    .service-icon {
+      flex: 0 0 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #0D67B5;
+      color: white;
+      font-size: 60px;
+      padding: 40px;
+    }
+    .service-icon img {
+      max-width: 100px;
+      max-height: 100px;
+    }
+
+    .service-content {
+      padding: 30px;
+      text-align: center;
+    }
+
+    .service-content h2 {
+      color: #0D67B5;
+      margin-bottom: 15px;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: #0D67B5;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 4px;
+      text-decoration: none;
+      margin-top: 15px;
+    }
+
+    /* Desktop Responsiveness */
+    @media screen and (min-width: 768px) {
+      nav {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      .logo h1 {
+        margin-bottom: 0;
+      }
+
+      .contact-details {
+        justify-content: flex-end;
+      }
+
+      /* .services-hero h1 {
+        font-size: 3rem;
+      } */
+
+      /* .services-hero p {
+        font-size: 1.5rem;
+      } */
+
+      .service-detail {
+        flex-direction: row;
+      }
+
+      /* .service-icon {
+        flex: 0 0 250px;
+      } */
+
+      .service-content {
+        flex: 1;
+        text-align: left;
+      }
+    }
+    @media (max-width: 768px) {
+      .services-hero {
+        height: auto;
+        
+    }
+
+      .services-hero h1 {
+        font-size: 1.2rem;
+      } 
+
+       .services-hero p {
+        font-size: 1rem;
+      }
+      .service-content {
+      padding-top: 0px;
+    }
+    /* .service-content p {
+      text-align: justify;
+    } */
+      .service-icon {
+        width: 100%;
+        padding: 20px;
+        font-size: 40px;
+        height: 10px;
+        max-height: 25px;
+      }
+      .services-hero {
+        flex-direction: column;
+        padding: 60px 20px;
+      /* height:315px ; */
+    }
+    .services-hero-content {
+    max-width: none;
+    margin-right: 0;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+
+    }
+    /* Large Screen Responsiveness */
+    @media screen and (min-width: 1200px) {
+      .detailed-services {
+        padding: 80px 15px;
+      }
+    }
+    /* Hamburger Menu */
+.hamburger {
+  display: none; /* Hidden by default for larger screens */
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+  z-index: 101; /* Ensure it's above other elements */
+}
+
+.hamburger span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+/* Transform hamburger into "X" (Close Button) */
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0; /* Hide the middle bar */
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+@media (max-width: 700px) {
+  .hamburger {
+    display: flex; /* Show hamburger on small screens */
+  }
+
+  .nav-links {
+    display: none; /* Hidden by default on smaller screens */
+    flex-direction: column;
+    position: absolute;
+    top: 68px;
+    right: 6px;
+    width: 134px;
+    background-color: #0D67B5;
+    border-radius: 8px;
+    align-items: center;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+  }
+
+  .nav-links.active {
+    display: flex; /* Show the menu when active */
+  }
+
+  .nav-links li {
+    margin: 10px 0;
+  }
+
+  .nav-links a {
+    color: #fff;
+    font-size: 18px;
+    font-family: 'Playfair Display', serif;
+  }
+}
+.call-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #0D67B5;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.phone-icon {
+    color: white;
+    font-size: 24px;
+    animation: shake 1s ease-in-out infinite;
+}
+
+@keyframes shake {
+    0%, 100% { 
+        transform: rotate(0deg); 
+    }
+    20% { 
+        transform: rotate(-8deg); 
+    }
+    40% { 
+        transform: rotate(8deg); 
+    }
+    60% { 
+        transform: rotate(-4deg); 
+    }
+    80% { 
+        transform: rotate(4deg); 
+    }
+}
+
+.call-btn:hover {
+    background-color: #0956a3;
+}
+
+/* Optional: Pause animation on hover */
+.call-btn:hover .phone-icon {
+    animation-play-state: paused;
+}
+
+  </style>
+</head>
+<body>
+    <!-- New contact info section -->
+    <div class="top-contact-info">
+        <div class="contact-details">
+          <a href="tel:{{contactdetails.contnum}}">
+            <i class="fas fa-phone"></i>
+            {{contactdetails.contnum}}
+          </a>
+          <a href="mailto:{{contactdetails.email}}">
+            <i class="fas fa-envelope"></i>
+            {{contactdetails.email}}
+          </a>
+        </div>
+      </div>
+      <header>
+          <nav>
+            <div class="logo">
+              <h1>Prime Estimating</h1>
+            </div>
+     
+            <ul class="nav-links">
+              <li><a href="{% url 'home'%}">Home</a></li>
+              <li><a href="{% url 'services'%}">Services</a></li>
+              <!-- <li><a href="#portfolio">Portfolio</a></li> -->
+              <li><a href="{% url 'about'%}">About</a></li>
+              <li><a href="{% url 'contact'%}">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </nav>
+        </header>
+  <script>
+        
+    // Select hamburger and nav-links
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    
+    // Toggle menu visibility and "close" button
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active'); // Toggle "X" animation
+      navLinks.classList.toggle('active'); // Show/hide nav menu
+    });
+        </script>
+
+  <!-- Services Hero Section -->
+  <section class="services-hero">
+    <div class="services-hero-content">
+      <!-- <h1>Comprehensive Construction Estimating Solutions</h1>
+      <p>Precision, expertise, and strategic insights to drive your project's success from concept to completion.</p>
+      <a href="#detailed-services" class="btn">Explore Our Services</a> -->
+      <h1>{{servicemanagedetails.title}}</h1>
+      <p>{{servicemanagedetails.line}}</p>
+      <a href="#detailed-services" class="btn">{{servicemanagedetails.button_text}}</a>
+    </div>
+  </section>
+
+  <!-- Detailed Services -->
+  <section id="detailed-services" class="detailed-services">
+    <!-- <div class="service-detail">
+      <div class="service-icon">
+        <i class="fas fa-list-alt"></i> -->
+        <!-- <img src="{%static 'images/Hero.jpg'%}" alt="Material Takeoff"> -->
+      <!-- </div>
+      <div class="service-content">
+        <h2>Material Takeoff</h2>
+        <p>Comprehensive analysis of material requirements for your project. Our detailed takeoff services provide accurate quantities, specifications, and cost breakdowns to ensure precise budgeting and procurement.</p>
+      </div>
+    </div> -->
+
+    {%for servicesdetail in servicesdetails %}
+    <div class="service-detail">
+      <div class="service-icon">
+        
+        <i class="{{ servicesdetail.icon_class }}"></i>
+        <!-- <img src="/path/to/project-planning-icon.png" alt="Project Planning"> -->
+      </div>
+      <div class="service-content">
+        <h2>{{ servicesdetail.name }}</h2>
+        <p>{{ servicesdetail.detail }}</p>
+      </div>
+    </div>
+    {%endfor%}
+    
+  </section>
+  <a href="tel:{{contactdetails.contnum}}">
+    <button class="call-btn" >
+      <i class="fas fa-phone phone-icon"></i>
+  </button>
+</a>
+</body>
+</html>

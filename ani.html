@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Construction Estimating Services</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+    /* Global Styles */
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+}
+
+a {
+  text-decoration: none;
+  color: #0D67B5;
+}
+
+.btn {
+  display: inline-block;
+  background-color: #0D67B5;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #0B5292;
+}
+
+/* Header Styles */
+header {
+  background-color: #0D67B5;
+  padding: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+@media (max-width: 768px) {
+  header {
+    position: relative;
+  }
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo h1 {
+  color: #fff;
+  margin: 0;
+  font-size: 24px;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  margin-left: 30px;
+}
+
+nav a {
+  color: #fff;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #d9d9d9;
+}
+
+/* Hero Section Styles */
+#hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('/static/images/Hero1.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 600px;
+  color: #000000;
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 600px;
+  margin: 0 20px;
+  animation: slideIn 1.2s ease-out;
+}
+
+.hero-content h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  animation: fadeInDown 1s ease-out;
+}
+
+.hero-content p {
+  font-size: 20px;
+  margin-bottom: 30px;
+  animation: fadeInUp 1s ease-out;
+}
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px); /* Start slightly below */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0); /* End in the original position */
+    }
+}
+
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px); /* Start slightly above */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0); /* End in the original position */
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px); /* Start slightly below */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0); /* End in the original position */
+    }
+}
+
+/* Services Section Styles */
+#services {
+  padding: 80px 20px;
+  text-align: center;
+}
+
+#services h2 {
+  font-size: 36px;
+  margin-bottom: 40px;
+  animation: fadeInDown 1s ease-out;
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 40px;
+}
+
+.service-card {
+  background-color: #f8f8f8;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeInUp 1s ease-out; /* Entry animation */
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px); /* Start slightly below */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0); /* End in original position */
+    }
+}
+
+.service-card:hover {
+    transform: translateY(-10px) scale(1.05); /* Lift and scale the card */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.service-card h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Portfolio Section Styles */
+#portfolio {
+  padding: 80px 20px;
+  background-color: #f8f8f8;
+}
+
+#portfolio h2 {
+  font-size: 36px;
+  margin-bottom: 40px;
+  text-align: center;
+  animation: fadeInDown 1s ease-out;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 40px;
+}
+
+.project-card {
+  animation: fadeInUp 1s ease-out;
+}
+
+.project-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.project-card h3 {
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.project-card p {
+  margin-top: 10px;
+}
+
+/* About Section Styles */
+#about {
+  padding: 80px 20px;
+}
+
+#about h2 {
+  font-size: 36px;
+  margin-bottom: 40px;
+  text-align: center;
+  animation: fadeInDown 1s ease-out;
+}
+
+.about-content {
+  display: flex;
+  align-items: center;
+}
+
+.about-image {
+  flex: 1;
+  text-align: center;
+  animation: fadeInLeft 1s ease-out;
+}
+
+.about-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.about-text {
+  flex: 1;
+  margin-left: 40px;
+  animation: fadeInRight 1s ease-out;
+}
+
+.about-text p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* Contact Section Styles */
+#contact {
+  padding: 80px 20px;
+  background-color: #f8f8f8;
+}
+
+#contact h2 {
+  font-size: 36px;
+  margin-bottom: 40px;
+  text-align: center;
+  animation: fadeInDown 1s ease-out;
+}
+
+form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  animation: fadeInUp 1s ease-out;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* Footer Styles */
+footer {
+  background-color: #0D67B5;
+  color: #fff;
+  padding: 40px 20px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.contact-info h3,
+.social-links h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+.contact-info p {
+  margin-bottom: 8px;
+}
+
+.social-links ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.social-links li {
+  margin-left: 20px;
+}
+
+.social-links a {
+  color: #fff;
+  font-size: 24px;
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: #d9d9d9;
+}
+
+.copyright {
+  text-align: center;
+  font-size: 14px;
+}
+/* Animations */
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleUp {
+    0% {
+        transform: scale(0.95);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Hero Section Animations */
+.hero-content {
+    animation: slideIn 1s ease-out;
+}
+
+.hero-content h1 {
+    animation: slideIn 0.8s ease-out;
+}
+
+.hero-content p {
+    animation: slideIn 1s ease-out;
+}
+
+/* Services Section Animations */
+.service-card {
+    animation: fadeInUp 0.8s ease-out;
+    animation-delay: 0.2s;
+}
+
+.service-card:hover {
+    animation: scaleUp 0.3s ease-out;
+}
+
+#services h2 {
+    animation: slideIn 0.6s ease-out;
+}
+/* Scroll Animations */
+.animate {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.animate.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Service Section Animations */
+#services .service-card {
+    animation: none;
+}
+
+#services .service-card.animate {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+#services h2.animate {
+    animation: slideIn 0.6s ease-out forwards;
+}
+
+/* Portfolio Section Animations */
+#portfolio .project-card.animate {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+#portfolio h2.animate {
+    animation: slideIn 0.6s ease-out forwards;
+}
+
+/* About Section Animations */
+#about .about-image.animate {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+#about .about-text.animate {
+    animation: fadeInUp 0.8s ease-out forwards;
+    animation-delay: 0.2s;
+}
+
+#about h2.animate {
+    animation: slideIn 0.6s ease-out forwards;
+}
+</style>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">
+        <h1>Prime Estimating</h1>
+      </div>
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="hero">
+      <div class="hero-content">
+        <h1 class="animate__animated animate__fadeInDown">Accurate Construction Estimating</h1>
+        <p class="animate__animated animate__fadeInUp">Leverage our expertise to win more bids and maximize your profits.</p>
+        <a href="#contact" class="btn animate__animated animate__fadeInUp">Get a Free Estimate</a>
+      </div>
+    </section>
+
+    <section id="services">
+      <h2 class="animate__animated animate__fadeInDown">Our Services</h2>
+      <div class="service-grid">
+        <div class="service-card animate__animated animate__fadeInUp">
+          <h3>Material Takeoff</h3>
+          <p>Comprehensive analysis of material requirements for your project.</p>
+        </div>
+        <div class="service-card animate__animated animate__fadeInUp">
+          <h3>Cost Estimation</h3>
+          <p>Detailed cost projections to ensure accurate budgeting.</p>
+        </div>
+        <div class="service-card animate__animated animate__fadeInUp">
+          <h3>Project Planning</h3>
+          <p>Optimization of schedules and workflows for efficient project execution.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolio">
+      <h2 class="animate__animated animate__fadeInDown">Our Portfolio</h2>
+      <div class="project-grid">
+        <div class="project-card animate__animated animate__fadeInUp">
+          <img src="project1.jpg" alt="Project 1">
+          <h3>Commercial Building</h3>
+          <p>Detailed estimating for a 20-story office complex.</p>
+        </div>
+        <div class="project-card animate__animated animate__fadeInUp">
+          <img src="project2.jpg" alt="Project 2">
+          <h3>Residential Development</h3>
+          <p>Cost analysis for a 100-unit luxury apartment complex.</p>
+        </div>
+        <div class="project-card animate__animated animate__fadeInUp">
+          <img src="project3.jpg" alt="Project 3">
+          <h3>Infrastructure Upgrade</h3>
+          <p>Comprehensive estimating for a major highway expansion project.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2 class="animate__animated animate__fadeInDown">About Us</h2>
+      <div class="about-content">
+        <div class="about-image animate__animated animate__fadeInLeft">
+          <img src="team-photo.jpg" alt="Our Team">
+        </div>
+        <div class="about-text animate__animated animate__fadeInRight">
+          <p>At Prime Estimating, we are a team of experienced professionals dedicated to providing accurate and reliable construction estimating solutions. With years of industry expertise, we help our clients win more bids and maximize their project profitability.</p>
+          <p>Our comprehensive approach to material takeoff, cost estimation, and project planning ensures that our clients have the necessary information to make informed decisions and successfully execute their construction projects.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2 class="animate__animated animate__fadeInDown">Contact Us</h2>
+      <form>
+        <div class="form-group animate__animated animate__fadeInUp">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group animate__animated animate__fadeInUp">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group animate__animated animate__fadeInUp">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+        <button type="submit" class="btn animate__animated animate__fadeInUp">Submit</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="contact-info">
+        <h3>Contact Us</h3>
+        <p>+1 (347) 480-1903</p>
+        <p>info@primeestimating.com</p>
+      </div>
+      <div class="social-links">
+        <h3>Follow Us</h3>
+        <ul>
+          <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+          <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+          <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+          <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      &copy; 2023 Prime Estimating. All rights reserved.
+    </div>
+  </footer>
+
+  <script >
+ // script.js
+document.addEventListener('DOMContentLoaded', () => {
+  const animatedElements = document.querySelectorAll('.animate');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+      } else {
+        entry.target.classList.remove('in-view');
+      }
+    });
+  }, {
+    rootMargin: '0px 0px -20% 0px', // Trigger the animation a bit earlier
+  });
+
+  animatedElements.forEach((element) => {
+    observer.observe(element);
+  });
+});
+  </script>
+</body>
+</html>

@@ -1,0 +1,569 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prime Estimating - About Us</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Global and Shared Styles */
+    html {
+    scroll-behavior: smooth;
+}
+/* Global Styles */
+body {
+  /* font-family: 'Roboto', sans-serif; */
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+}
+
+a {
+  text-decoration: none;
+  color: #0D67B5;
+}
+    /* Add these styles to your existing CSS */
+    .top-contact-info {
+      background-color: #0B5292;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      color: white;
+      font-size: 14px;
+      position: sticky;
+      top: 0;
+      z-index: 200; /* Ensure it's above other elements */
+      /* width: 100%; */
+    }
+
+
+    .contact-details {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .contact-details a {
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .contact-details i {
+      font-size: 16px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .top-contact-info {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+        padding: 10px;
+        height: auto;
+        position: sticky; /* Reset for mobile */
+      }
+
+      header {
+        top: 0; /* Reset for mobile */
+      }
+
+      .contact-details {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+
+.btn {
+  display: inline-block;
+  background-color: #0D67B5;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #0B5292;
+}
+
+/* Header Styles */
+header {
+  background-color: #0D67B5;
+  padding: 20px;
+  position: sticky;
+  top: 37px;
+  z-index: 100;
+}
+
+@media (max-width: 768px) {
+  header {
+    top: 62.5px;
+  }
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo h1 {
+  color: #fff;
+  margin: 0;
+  font-size: 24px;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  margin-left: 30px;
+}
+
+nav a {
+  color: #fff;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #d9d9d9;
+}
+
+
+   /* Services Hero */
+   .about-hero  {
+      background-image: url('{{ aboutmanagedetails.background_image.url }}');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 100px 15px;
+      height:315px ;
+      position: relative;
+    }
+
+    .about-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(13, 103, 181, 0.7);
+    }
+
+    .about-hero-content {
+      position: relative;
+      z-index: 10;
+      max-width: 800px;
+      margin: 0 auto;
+      animation: slideIn 1.2s ease-out;
+    }
+
+    .about-hero  h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      animation: slideIn 1s ease-out;
+    }
+
+    .about-hero  p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      animation: slideIn 1s ease-out;
+    }
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px); /* Start slightly below */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0); /* End in the original position */
+    }
+}
+    /* About Hero Section
+    .about-hero {
+      background-image: url('/static/images/Hero1.jpg');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 100px 15px;
+      position: relative;
+      height: 315px;
+    }
+
+    .about-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(13, 103, 181, 0.7);
+    }
+
+    .about-hero-content {
+      position: relative;
+      z-index: 10;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .about-hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .about-hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    } */
+
+    /* Company Overview Section */
+    .company-overview {
+      max-width: 1200px;
+      margin: 50px auto;
+      padding: 0 15px;
+      display: flex;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .overview-content {
+      flex: 1;
+    }
+
+    .overview-content h2 {
+      color: #0D67B5;
+      margin-bottom: 20px;
+    }
+
+    .company-stats {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .stat {
+      background-color: #f8f8f8;
+      padding: 20px;
+      border-radius: 8px;
+      flex: 1;
+      margin: 0 10px;
+    }
+
+    .stat-number {
+      color: #0D67B5;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    .values-section {
+      background-color: #f4f4f4;
+      padding: 50px 15px;
+    }
+
+    .values-section h2 {
+      text-align: center;
+      color: #0D67B5;
+      margin-bottom: 30px;
+    }
+
+    .core-values {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .value-item {
+      text-align: center;
+      max-width: 250px;
+      background-color: white;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .value-item:hover {
+      transform: translateY(-10px);
+    }
+
+    .value-item i {
+      color: #0D67B5;
+      font-size: 40px;
+      margin-bottom: 15px;
+    }
+
+    .value-item h3 {
+      color: #0D67B5;
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .core-values {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .company-overview {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .company-stats {
+        flex-direction: column;
+      }
+      .about-hero h1 {
+        font-size: 1.8rem;
+      }
+      .about-hero  {
+        height: auto;
+      }
+
+      .about-hero p {
+        font-size: 1rem;
+      }
+
+      .about-info {
+        padding: 20px;
+      }
+      .stat {
+        margin: 10px 0;
+      }
+
+      .team-members {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+    /* Hamburger Menu */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+      z-index: 101;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background-color: #fff;
+      transition: all 0.3s ease;
+    }
+
+    @media (max-width: 700px) {
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 68px;
+        right: 6px;
+        width: 134px;
+        background-color: #0D67B5;
+        border-radius: 8px;
+        align-items: center;
+        padding: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 100;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-links li {
+        margin: 10px 0;
+      }
+    }
+    .call-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #0D67B5;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.phone-icon {
+    color: white;
+    font-size: 24px;
+    animation: shake 1s ease-in-out infinite;
+}
+
+@keyframes shake {
+    0%, 100% { 
+        transform: rotate(0deg); 
+    }
+    20% { 
+        transform: rotate(-8deg); 
+    }
+    40% { 
+        transform: rotate(8deg); 
+    }
+    60% { 
+        transform: rotate(-4deg); 
+    }
+    80% { 
+        transform: rotate(4deg); 
+    }
+}
+
+.call-btn:hover {
+    background-color: #0956a3;
+}
+
+/* Optional: Pause animation on hover */
+.call-btn:hover .phone-icon {
+    animation-play-state: paused;
+}
+  </style>
+</head>
+<body>
+  <!-- Top Contact Info -->
+  <div class="top-contact-info">
+    <div class="contact-details">
+      <a href="tel:{{contactdetails.contnum}}">
+        <i class="fas fa-phone"></i>
+        {{contactdetails.contnum}}
+      </a>
+      <a href="mailto:{{contactdetails.email}}">
+        <i class="fas fa-envelope"></i>
+        {{contactdetails.email}}
+      </a>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <nav>
+      <div class="logo">
+        <h1>Prime Estimating</h1>
+      </div>
+      
+      <ul class="nav-links">
+        <li><a href="{% url 'home'%}">Home</a></li>
+        <li><a href="{% url 'services'%}">Services</a></li>
+        <!-- <li><a href="#portfolio">Portfolio</a></li> -->
+        <li><a href="{% url 'about'%}">About</a></li>
+        <li><a href="{% url 'contact'%}">Contact</a></li>
+      </ul>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+  </header>
+
+  <!-- About Hero Section -->
+  <section class="about-hero">
+    <div class="about-hero-content">
+      <!-- <h1>Building Precision, Delivering Excellence</h1>
+      <p>A trusted partner in construction estimating, delivering accurate, strategic insights for successful project outcomes.</p>
+      <a href="#co" class="btn">Read more about us</a>    -->
+      <h1>{{aboutmanagedetails.title}}</h1>
+      <p>{{aboutmanagedetails.line}}</p>
+      <a href="#co" class="btn">{{aboutmanagedetails.button_text}}</a>
+    </div>
+  </section>
+
+  <!-- Company Overview Section -->
+  <section class="company-overview" id="co">
+    <div class="overview-content">
+      <h2>Who We Are</h2>
+      <!-- <p>Prime Estimating is a leading construction estimating firm dedicated to providing precise, comprehensive financial and strategic solutions for construction projects. With years of industry expertise, we transform complex project data into actionable insights that drive efficiency and profitability.</p> -->
+      <p>{{aboutdetails.story}}</p>
+     
+      <div class="company-stats">
+        <div class="stat">
+          <div class="stat-number">15+</div>
+          <p>Years of Experience</p>
+        </div>
+        <div class="stat">
+          <div class="stat-number">250+</div>
+          <p>Projects Completed</p>
+        </div>
+        <div class="stat">
+          <div class="stat-number">98%</div>
+          <p>Client Satisfaction</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="values-section">
+    <h2>Our Core Values</h2>
+    <div class="core-values">
+      <div class="value-item">
+        <i class="fas fa-bullseye"></i>
+        <h3>Precision</h3>
+        <p>Delivering meticulous, data-driven estimations that form the foundation of successful construction projects.</p>
+      </div>
+      <div class="value-item">
+        <i class="fas fa-handshake"></i>
+        <h3>Transparency</h3>
+        <p>Maintaining open communication and providing clear, comprehensive insights throughout the estimating process.</p>
+      </div>
+      <div class="value-item">
+        <i class="fas fa-chart-line"></i>
+        <h3>Innovation</h3>
+        <p>Continuously adapting and leveraging cutting-edge technologies to enhance our estimating methodologies.</p>
+      </div>
+    </div>
+    
+  </section>
+  <a href="tel:{{contactdetails.contnum}}">
+    <button class="call-btn" >
+      <i class="fas fa-phone phone-icon"></i>
+  </button>
+</a>
+
+  <script>
+    // Hamburger Menu Toggle
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>

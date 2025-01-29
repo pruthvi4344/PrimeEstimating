@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pruthviraj - Fullstack Developer</title>
+  <style>
+    /* General Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #F5F5F5;
+  color: #333333;
+}
+
+header {
+  background-color: #FFD700;
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  margin: 0 1rem;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #333333;
+  font-weight: bold;
+}
+
+/* Hero Section */
+.hero {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #FFD700;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-content h1 {
+  font-size: 4rem;
+  margin: 0;
+}
+
+.hero-content .tagline {
+  font-size: 1.5rem;
+  margin: 1rem 0;
+}
+
+.hero-content .btn {
+  padding: 0.75rem 1.5rem;
+  background-color: #333333;
+  color: #FFFFFF;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.hero-content .btn:hover {
+  background-color: #555555;
+}
+
+.scroll-down {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-20px);
+  }
+  60% {
+    transform: translateY(-10px);
+  }
+}
+
+/* About Section */
+.about {
+  padding: 4rem 2rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.about-content {
+  max-width: 600px;
+}
+
+.profile-pic img {
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border: 5px solid #FFD700;
+  animation: border-pulse 2s infinite;
+}
+
+@keyframes border-pulse {
+  0% {
+    border-color: #FFD700;
+  }
+  50% {
+    border-color: #FFEB3B;
+  }
+  100% {
+    border-color: #FFD700;
+  }
+}
+
+/* Skills Section */
+.skills {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.skill {
+  background-color: #FFFFFF;
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.skill:hover {
+  transform: translateY(-10px);
+}
+
+.skill-bar {
+  background-color: #F5F5F5;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+
+.skill-level {
+  height: 10px;
+  background-color: #FFD700;
+  width: 0;
+  transition: width 1s ease-in-out;
+}
+
+/* Projects Section */
+.projects {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.project-card {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  perspective: 1000px;
+}
+
+.project-front,
+.project-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  transition: transform 0.6s;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.project-front {
+  background-color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.project-back {
+  background-color: #FFD700;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.project-card:hover .project-front {
+  transform: rotateY(180deg);
+}
+
+.project-card:hover .project-back {
+  transform: rotateY(0);
+}
+
+/* Contact Section */
+.contact {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.contact form {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contact input,
+.contact textarea {
+  padding: 0.75rem;
+  border: 1px solid #CCCCCC;
+  border-radius: 5px;
+  transition: border-color 0.3s;
+}
+
+.contact input:focus,
+.contact textarea:focus {
+  border-color: #FFD700;
+}
+
+.contact button {
+  padding: 0.75rem;
+  background-color: #333333;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.contact button:hover {
+  background-color: #555555;
+}
+
+/* Footer */
+footer {
+  background-color: #333333;
+  color: #FFFFFF;
+  text-align: center;
+  padding: 1rem;
+}
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollTrigger.min.js"></script>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1>Pruthviraj</h1>
+      <p class="tagline"></p>
+      <a href="#about" class="btn">Explore My Work</a>
+    </div>
+    <div class="scroll-down">
+      <span></span>
+    </div>
+    <div class="hero-animation"></div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about">
+    <div class="about-content">
+      <h2>About Me</h2>
+      <p>Hi, I'm Pruthviraj, a passionate full-stack developer with expertise in Django, React, Node.js, and more. I love building scalable and user-friendly web applications.</p>
+    </div>
+    <div class="profile-pic">
+      <img src="/static/images/pruthvi1.png" alt="Pruthviraj">
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="skills">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div class="skill">
+        <div class="skill-name">Django</div>
+        <div class="skill-bar">
+          <div class="skill-level" data-level="90%"></div>
+        </div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">React</div>
+        <div class="skill-bar">
+          <div class="skill-level" data-level="85%"></div>
+        </div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">Node.js</div>
+        <div class="skill-bar">
+          <div class="skill-level" data-level="80%"></div>
+        </div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">HTML/CSS</div>
+        <div class="skill-bar">
+          <div class="skill-level" data-level="95%"></div>
+        </div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">JavaScript</div>
+        <div class="skill-bar">
+          <div class="skill-level" data-level="90%"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="projects">
+    <h2>Projects</h2>
+    <div class="project-grid">
+      <div class="project-card">
+        <div class="project-front">
+          <img src="project1.jpg" alt="Project 1">
+          <h3>Project 1</h3>
+        </div>
+        <div class="project-back">
+          <p>Description of Project 1.</p>
+          <a href="#" class="btn">View Details</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-front">
+          <img src="project2.jpg" alt="Project 2">
+          <h3>Project 2</h3>
+        </div>
+        <div class="project-back">
+          <p>Description of Project 2.</p>
+          <a href="#" class="btn">View Details</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <h2>Contact Me</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2023 Pruthviraj. All rights reserved.</p>
+  </footer>
+
+  <script>
+// GSAP Animations
+gsap.registerPlugin(ScrollTrigger);
+
+// Hero Section Typing Animation
+const tagline = "Fullstack Developer | Creating Web Apps with Django, React, and Node.js";
+let index = 0;
+
+function type() {
+  if (index < tagline.length) {
+    document.querySelector('.tagline').textContent += tagline.charAt(index);
+    index++;
+    setTimeout(type, 50);
+  }
+}
+
+type();
+
+// Scroll Down Arrow Animation
+gsap.from('.scroll-down', {
+  y: -20,
+  repeat: -1,
+  yoyo: true,
+  ease: 'power1.inOut',
+  duration: 1,
+});
+
+// About Section Animation
+gsap.from('.about-content', {
+  scrollTrigger: {
+    trigger: '.about',
+    start: 'top 80%',
+  },
+  opacity: 0,
+  y: 50,
+  duration: 1,
+});
+
+gsap.from('.profile-pic', {
+  scrollTrigger: {
+    trigger: '.about',
+    start: 'top 80%',
+  },
+  opacity: 0,
+  y: 50,
+  duration: 1,
+  delay: 0.5,
+});
+
+// Skills Section Animation
+gsap.from('.skill', {
+  scrollTrigger: {
+    trigger: '.skills',
+    start: 'top 80%',
+  },
+  opacity: 0,
+  y: 50,
+  stagger: 0.2,
+  duration: 1,
+});
+
+document.querySelectorAll('.skill-level').forEach((bar) => {
+  const level = bar.getAttribute('data-level');
+  gsap.to(bar, {
+    width: level,
+    scrollTrigger: {
+      trigger: bar,
+      start: 'top 80%',
+    },
+    duration: 1,
+  });
+});
+
+// Projects Section Animation
+gsap.from('.project-card', {
+  scrollTrigger: {
+    trigger: '.projects',
+    start: 'top 80%',
+  },
+  opacity: 0,
+  y: 50,
+  stagger: 0.2,
+  duration: 1,
+});
+
+// Contact Section Animation
+gsap.from('.contact form', {
+  scrollTrigger: {
+    trigger: '.contact',
+    start: 'top 80%',
+  },
+  opacity: 0,
+  y: 50,
+  duration: 1,
+});
+  </script>
+</body>
+</html>
