@@ -5,7 +5,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Prime Estimating - About Us</title>
+ 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baskervville:ital@0;1&family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=Gilda+Display&family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&family=Pridi:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="icon" type="image/x-icon" href="{% static '/images/PE.png' %}">
   <style>
     /* Global and Shared Styles */
     html {
@@ -17,6 +23,8 @@ body {
   margin: 0;
   padding: 0;
   color: #333;
+  font-family: 'Gilda Display', serif;
+
 }
 
 h1, h2, h3 {
@@ -172,19 +180,19 @@ nav a:hover {
       z-index: 10;
       max-width: 800px;
       margin: 0 auto;
-      animation: slideIn 1.2s ease-out;
+      /* animation: slideIn 1.2s ease-out; */
     }
 
     .about-hero  h1 {
       font-size: 2.5rem;
       margin-bottom: 20px;
-      animation: slideIn 1s ease-out;
+      /* animation: slideIn 1s ease-out; */
     }
 
     .about-hero  p {
       font-size: 1.2rem;
       margin-bottom: 30px;
-      animation: slideIn 1s ease-out;
+     
     }
 @keyframes slideIn {
     0% {
@@ -252,6 +260,8 @@ nav a:hover {
     .overview-content h2 {
       color: #0D67B5;
       margin-bottom: 20px;
+      
+      text-align: center;
     }
 
     .company-stats {
@@ -405,54 +415,50 @@ nav a:hover {
       }
     }
     .call-btn {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background-color: #0D67B5;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s;
-}
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: #0D67B5;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s;
+      animation: pulse 2s infinite;
+    }
 
-.phone-icon {
-    color: white;
-    font-size: 24px;
-    animation: shake 1s ease-in-out infinite;
-}
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(13, 103, 181, 0.5); }
+      70% { box-shadow: 0 0 0 15px rgba(13, 103, 181, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(13, 103, 181, 0); }
+    }
 
-@keyframes shake {
-    0%, 100% { 
-        transform: rotate(0deg); 
+    .phone-icon {
+      color: white;
+      font-size: 24px;
+      animation: shake 1s ease-in-out infinite;
     }
-    20% { 
-        transform: rotate(-8deg); 
-    }
-    40% { 
-        transform: rotate(8deg); 
-    }
-    60% { 
-        transform: rotate(-4deg); 
-    }
-    80% { 
-        transform: rotate(4deg); 
-    }
-}
 
-.call-btn:hover {
-    background-color: #0956a3;
-}
+    @keyframes shake {
+      0%, 100% { transform: rotate(0deg); }
+      20% { transform: rotate(-8deg); }
+      40% { transform: rotate(8deg); }
+      60% { transform: rotate(-4deg); }
+      80% { transform: rotate(4deg); }
+    }
 
-/* Optional: Pause animation on hover */
-.call-btn:hover .phone-icon {
-    animation-play-state: paused;
-}
+    .call-btn:hover {
+      background-color: #0956a3;
+    }
+
+    .call-btn:hover .phone-icon {
+      animation-play-state: paused;
+    }
   </style>
 </head>
 <body>
@@ -478,11 +484,11 @@ nav a:hover {
       </div>
       
       <ul class="nav-links">
-        <li><a href="{% url 'home'%}">Home</a></li>
-        <li><a href="{% url 'services'%}">Services</a></li>
-        <!-- <li><a href="#portfolio">Portfolio</a></li> -->
-        <li><a href="{% url 'about'%}">About</a></li>
-        <li><a href="{% url 'contact'%}">Contact</a></li>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'services' %}">Services</a></li>
+        <li><a href="{% url 'pricing' %}">Pricing</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li><a href="{% url 'contact' %}">Contact</a></li>
       </ul>
       <div class="hamburger">
         <span></span>
@@ -498,30 +504,30 @@ nav a:hover {
       <!-- <h1>Building Precision, Delivering Excellence</h1>
       <p>A trusted partner in construction estimating, delivering accurate, strategic insights for successful project outcomes.</p>
       <a href="#co" class="btn">Read more about us</a>    -->
-      <h1>{{aboutmanagedetails.title}}</h1>
-      <p>{{aboutmanagedetails.line}}</p>
-      <a href="#co" class="btn">{{aboutmanagedetails.button_text}}</a>
+      <h1 data-aos="fade-right"  data-aos-duration="2100">{{aboutmanagedetails.title}}</h1>
+      <p data-aos="fade-left"  data-aos-duration="2000">{{aboutmanagedetails.line}}</p>
+      <a data-aos="fade-up"  data-aos-duration="2000" href="#co" class="btn">{{aboutmanagedetails.button_text}}</a>
     </div>
   </section>
 
   <!-- Company Overview Section -->
   <section class="company-overview" id="co">
     <div class="overview-content">
-      <h2>Who We Are</h2>
+      <h2 data-aos="zoom-in-up"  data-aos-duration="1000">Who We Are</h2>
       <!-- <p>Prime Estimating is a leading construction estimating firm dedicated to providing precise, comprehensive financial and strategic solutions for construction projects. With years of industry expertise, we transform complex project data into actionable insights that drive efficiency and profitability.</p> -->
-      <p>{{aboutdetails.story}}</p>
+      <p data-aos="zoom-in-up"  data-aos-duration="1000">{{aboutdetails.story}}</p>
      
-      <div class="company-stats">
-        <div class="stat">
-          <div class="stat-number">15+</div>
+      <div class="company-stats" >
+        <div class="stat" data-aos="fade-right"  data-aos-duration="1000">
+          <div class="stat-number" data-target="{{aboutdetails.experience}}+">0+</div>
           <p>Years of Experience</p>
         </div>
-        <div class="stat">
-          <div class="stat-number">250+</div>
+        <div class="stat" data-aos="zoom-in-up"  data-aos-duration="1000">
+          <div class="stat-number" data-target="{{aboutdetails.procom}}+">0+</div>
           <p>Projects Completed</p>
         </div>
-        <div class="stat">
-          <div class="stat-number">98%</div>
+        <div class="stat" data-aos="fade-left"  data-aos-duration="1000">
+          <div class="stat-number" data-target="{{aboutdetails.satisfaction}}%">0%</div>
           <p>Client Satisfaction</p>
         </div>
       </div>
@@ -529,9 +535,9 @@ nav a:hover {
   </section>
 
   <section class="values-section">
-    <h2>Our Core Values</h2>
+    <h2 data-aos="zoom-in-up"  data-aos-duration="1000">Our Core Values</h2>
     <div class="core-values">
-      <div class="value-item">
+      <!-- <div class="value-item">
         <i class="fas fa-bullseye"></i>
         <h3>Precision</h3>
         <p>Delivering meticulous, data-driven estimations that form the foundation of successful construction projects.</p>
@@ -545,7 +551,15 @@ nav a:hover {
         <i class="fas fa-chart-line"></i>
         <h3>Innovation</h3>
         <p>Continuously adapting and leveraging cutting-edge technologies to enhance our estimating methodologies.</p>
+      </div> -->
+      {%for corevaluedetail in corevaluedetails %}
+      <div class="value-item" data-aos="zoom-in-up"
+       data-aos-duration="1000">
+        <i class="{{corevaluedetail.icon_class}}"></i>
+        <h3>{{corevaluedetail.title}}</h3>
+        <p>{{corevaluedetail.detail}}</p>
       </div>
+      {%endfor%}
     </div>
     
   </section>
@@ -554,8 +568,9 @@ nav a:hover {
       <i class="fas fa-phone phone-icon"></i>
   </button>
 </a>
-
-  <script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+  AOS.init();
     // Hamburger Menu Toggle
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
@@ -564,6 +579,43 @@ nav a:hover {
       hamburger.classList.toggle('active');
       navLinks.classList.toggle('active');
     });
+
+
+
+    document.addEventListener("DOMContentLoaded", () => {
+    const counters = document.querySelectorAll(".stat-number");
+
+    const animateCounters = (entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const counter = entry.target;
+                const targetValue = counter.getAttribute("data-target");
+                const target = parseInt(targetValue); // Extract number only
+                const suffix = targetValue.replace(/[0-9]/g, ""); // Extract + or %
+                let start = 0;
+                const duration = 2000; // Duration in milliseconds
+                const stepTime = Math.abs(Math.floor(duration / target));
+
+                const incrementCounter = () => {
+                    start += Math.ceil(target / 100);
+                    if (start >= target) {
+                        counter.innerText = target + suffix; // Append correct suffix
+                    } else {
+                        counter.innerText = start + suffix;
+                        setTimeout(incrementCounter, stepTime);
+                    }
+                };
+
+                incrementCounter();
+                observer.unobserve(counter); // Stops observing after animation
+            }
+        });
+    };
+
+    const observer = new IntersectionObserver(animateCounters, { threshold: 0.5 });
+
+    counters.forEach(counter => observer.observe(counter));
+});
   </script>
 </body>
 </html>

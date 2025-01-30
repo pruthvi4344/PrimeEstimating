@@ -273,6 +273,7 @@
         <li><a href="#" onclick="showSection('servicemanage')"><i class="fas fa-tasks"></i> <span>Service welcome Manage</span></a></li>
         <li><a href="#" onclick="showSection('aboutmanage')"><i class="fas fa-info-circle"></i> <span>About welcome Manage</span></a></li>
         <li><a href="#" onclick="showSection('contactmanage')"><i class="fas fa-user"></i> <span>Contact welcome Manage</span></a></li>
+        <li><a href="#" onclick="showSection('corevalue')"><i class="fas fa-info-circle"></i> <span>About/ Our Core Values.</span></a></li>
         <li><a href="{%url 'admin_logout'%}" onclick="return confirm('Are you sure you want to logout?');"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a></li>
     </ul>
 </div>
@@ -349,6 +350,32 @@
                 <div class="form-group">
                     <label>Company Story</label>
                     <textarea name="story" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Years Of Experience</label>
+                    <input type="number" name="experience" required>
+                </div>
+                <div class="form-group">
+                    <label>Projects Completed</label>
+                    <input type="number" name="procom" required>
+                </div>
+                <div class="form-group">
+                    <label>Client satisfaction</label>
+                    <input type="number" name="satisfaction" required>
+                </div>
+                <br>
+                <label>Our Core Values</label>
+                <div class="form-group">
+                    <label>title</label>
+                    <input type="text" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label>detail</label>
+                    <input type="text" name="detail" required>
+                </div>
+                <div class="form-group">
+                    <label>Icon Class image name</label>
+                    <input type="text" name="icon_class" required>
                 </div>
                 <button type="submit" class="btn">Update About</button>
             </form>
@@ -627,7 +654,56 @@
                 </tbody>
             </table>
         </div>   
+
+        <div id="corevalue" class="section card" style="display:none;">
+            <h2>About Core Value Management</h2>
+            <form id="aboutForm" method="POST">
+                {%csrf_token%}
+                <input type="hidden" name="form_type" value="corevalue_form">
+    
+                <label>Our Core Values</label>
+                <div class="form-group">
+                    <label>title</label>
+                    <input type="text" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label>detail</label>
+                    <input type="text" name="detail" required>
+                </div>
+                <div class="form-group">
+                    <label>Icon Class image name</label>
+                    <input type="text" name="icon_class" required>
+                </div>
+                <button type="submit" class="btn">Save</button>
+            </form>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Detail</th>
+                        <th>Icon</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for corevaluedetail in corevaluedetails%}
+                    <tr>
+                        <td>{{corevaluedetail.title}}</td>
+                        <td>{{corevaluedetail.detail}}</td>
+                        <td>{{corevaluedetail.icon_class}}</td>
+                        <td>
+                            <a href="{% url 'edit_corevalue' corevaluedetail.id %}" ><button class="btn">Edit</button></a>
+                            <a href="{% url 'delete_corevalue' corevaluedetail.id %}" ><button onclick="return confirm('Are you sure you want to delete this detail?');" class="btn">Delete</button></a>
+                        </td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+
     </div>
+  
+
 
     <div id="logoutModal" class="modal">
         <div class="modal-content">

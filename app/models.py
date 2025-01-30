@@ -13,8 +13,18 @@ class Service(models.Model):
      return self.name
     
 class About(models.Model):
-   story = models.CharField(max_length=1000)
-   
+   story = models.CharField(max_length=1000, blank=True, null=True)
+   experience = models.IntegerField( blank=True, null=True)
+   procom = models.IntegerField( blank=True, null=True)
+   satisfaction = models.IntegerField( blank=True, null=True)
+   title = models.CharField(max_length=100, blank=True, null=True)
+   detail = models.CharField(max_length=300, blank=True, null=True)
+   icon_class = models.CharField(max_length=100, default="fas fa-cogs", blank=True, null=True)
+
+class Corevalue(models.Model):
+   title = models.CharField(max_length=30)
+   detail = models.CharField(max_length=300)
+   icon_class = models.CharField(max_length=100, default="fas fa-cogs", blank=True, null=True)
     
 class Contact(models.Model):
    email = models.CharField(max_length=50)

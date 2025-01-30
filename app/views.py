@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .models import Service, Contact,Indexmanage,Servicemanage,Contactmanage,Aboutmanage,User,About
+from .models import Service, Contact,Indexmanage,Servicemanage,Contactmanage,Aboutmanage,User,About,Corevalue
 from django.contrib import messages
 
 # Create your views here.
@@ -15,13 +15,19 @@ def services(request):
     servicemanagedetails = Servicemanage.objects.first()
     return render(request, 'services.html',{'servicesdetails':servicesdetails,'contactdetails':contactdetails,'servicemanagedetails':servicemanagedetails} )
 
+def pricing(request):
+    return render(request, 'pricing.html')
+
 def about(request):
+    corevaluedetails = Corevalue.objects.all()
     contactdetails = Contact.objects.first()
     aboutmanagedetails = Aboutmanage.objects.first()
     aboutdetails = About.objects.first()
     return render(request, 'about.html',{'contactdetails':contactdetails,
                                          'aboutdetails':aboutdetails,
-                                          'aboutmanagedetails':aboutmanagedetails} )
+                                          'aboutmanagedetails':aboutmanagedetails,
+                                          'corevaluedetails': corevaluedetails
+                                          } )
 
 def contact(request):
     contactdetails = Contact.objects.first()
@@ -62,6 +68,7 @@ def adminpanel(request):
         messages.error(request, 'You need to login.')
         return redirect('admin_login')
     servicesdetails = Service.objects.all()
+    corevaluedetails = Corevalue.objects.all()
     contactdetails = Contact.objects.first() 
     aboutdetails = About.objects.first()
     indexmanagedetails = Indexmanage.objects.first()
@@ -151,6 +158,16 @@ def adminpanel(request):
             Contactmanage.objects.create(title=title, line=line, button_text=button_text, background_image=background_image)
             messages.success(request, 'Contact page details saved successfully.')
             return redirect('adminpanel')
+        
+        elif form_type == 'corevalue_form':
+            
+            title = request.POST.get('title')
+            detail = request.POST.get('detail')
+            icon_class = request.POST.get('icon_class')
+            Corevalue.objects.create(title=title, detail=detail, icon_class=icon_class)
+            messages.success(request, 'Core value details saved successfully.')
+            return redirect('adminpanel')
+
     return render(request, 'adminpanel.html', {'servicesdetails': servicesdetails,
                                                'contactdetails':contactdetails,
                                                'aboutdetails':aboutdetails,
@@ -158,6 +175,7 @@ def adminpanel(request):
                                                 'servicemanagedetails':servicemanagedetails,
                                                 'aboutmanagedetails':aboutmanagedetails,
                                                 'contactmanagedetails':contactmanagedetails,
+                                                'corevaluedetails': corevaluedetails,
                                                 })
 
 def delete_service(request, service_id):
@@ -192,6 +210,9 @@ def edit_about(request):
     if aboutdetails:
        if request.method == 'POST':
         aboutdetails.story = request.POST.get('story')
+        aboutdetails.experience = request.POST.get('experience')
+        aboutdetails.procom = request.POST.get('procom')
+        aboutdetails.satisfaction = request.POST.get('satisfaction')
         aboutdetails.save()
         messages.success(request, 'About information Updated Successfully.')
         return redirect('adminpanel')
@@ -367,4 +388,26 @@ def delete_contactmanage(request):
     
     else:
         messages.error(request,'No contact manage details found to delete.')
+    return redirect('adminpanel')
+
+def edit_corevalue(request,id):
+    corevaluedetails = get_object_or_404(Corevalue, id=id)
+
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        detail = request.POST.get('detail')
+        icon_class = request.POST.get('icon_class') 
+        corevaluedetails.title = title
+        corevaluedetails.detail = detail
+        corevaluedetails.icon_class = icon_class
+        corevaluedetails.save()
+
+        messages.success(request, 'Service updated successfully.')
+        return redirect('adminpanel')  # Redirect to your admin panel or desired page
+    return render(request, 'edit_corevalues.html', {'corevaluedetails':corevaluedetails})
+
+def delete_corevalue(request,id):
+    corevaluedetails = get_object_or_404(Corevalue, id=id)
+    corevaluedetails.delete()
+    messages.success(request, 'Core value deleted successfully.')
     return redirect('adminpanel')

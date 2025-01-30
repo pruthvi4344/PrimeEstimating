@@ -1,0 +1,483 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prime Estimating - Pricing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baskervville:ital@0;1&family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=Gilda+Display&family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&family=Pridi:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="icon" type="image/x-icon" href="{% static '/images/PE.png' %}">
+  <style>
+    /* [Previous CSS remains exactly the same] */
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      margin: 0;
+      padding: 0;
+      
+      font-family: 'Gilda Display', serif;
+
+      color: #333;
+    }
+
+    .top-contact-info {
+      background-color: #0B5292;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      color: white;
+      font-size: 14px;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+    }
+
+    .contact-details {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .contact-details a {
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    header {
+      background-color: #0D67B5;
+      padding: 20px;
+      position: sticky;
+      top: 37px;
+      z-index: 100;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo h1 {
+      color: #fff;
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links li {
+      margin-left: 30px;
+    }
+
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    /* Pricing Hero Section */
+    .pricing-hero {
+      background-image: url('/api/placeholder/1200/400');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 100px 15px;
+      position: relative;
+      height: 315px;
+    }
+
+    .pricing-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(13, 103, 181, 0.7);
+    }
+
+    .pricing-hero-content {
+      position: relative;
+      z-index: 10;
+      max-width: 800px;
+      margin: 0 auto;
+      animation: slideIn 1.2s ease-out;
+    }
+
+    /* Pricing Cards Section */
+    .pricing-section {
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .pricing-card {
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .pricing-card h3 {
+      color: #0D67B5;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .price {
+      font-size: 48px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .price span {
+      font-size: 20px;
+      color: #666;
+    }
+
+    .features {
+      list-style: none;
+      padding: 0;
+      margin: 30px 0;
+    }
+
+    .features li {
+      margin: 15px 0;
+      color: #666;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: #0D67B5;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #0B5292;
+    }
+
+    .popular {
+      position: relative;
+      border: 2px solid #0D67B5;
+    }
+
+    .popular::before {
+      content: 'Most Popular';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0D67B5;
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 14px;
+    }
+
+    /* Call Button */
+    .call-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: #0D67B5;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s;
+    }
+
+    .phone-icon {
+      color: white;
+      font-size: 24px;
+      animation: shake 1s ease-in-out infinite;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: rotate(0deg); }
+      20% { transform: rotate(-8deg); }
+      40% { transform: rotate(8deg); }
+      60% { transform: rotate(-4deg); }
+      80% { transform: rotate(4deg); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .pricing-hero {
+        height: auto;
+        padding: 60px 20px;
+      }
+
+      .pricing-hero h1 {
+        font-size: 1.2rem;
+      }
+
+      .pricing-hero p {
+        font-size: 1rem;
+      }
+
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .top-contact-info {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+        padding: 10px;
+      }
+
+      .contact-details {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      header {
+        top: 62.5px;
+      }
+    }
+
+    /* Hamburger Menu */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+      z-index: 101;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background-color: #fff;
+      transition: all 0.3s ease;
+    }
+
+    @media (max-width: 700px) {
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 68px;
+        right: 6px;
+        width: 134px;
+        background-color: #0D67B5;
+        border-radius: 8px;
+        align-items: center;
+        padding: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 100;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-links li {
+        margin: 10px 0;
+      }
+
+      .nav-links a {
+        font-size: 18px;
+      }
+    }
+    .call-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: #0D67B5;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(13, 103, 181, 0.5); }
+      70% { box-shadow: 0 0 0 15px rgba(13, 103, 181, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(13, 103, 181, 0); }
+    }
+
+    .phone-icon {
+      color: white;
+      font-size: 24px;
+      animation: shake 1s ease-in-out infinite;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: rotate(0deg); }
+      20% { transform: rotate(-8deg); }
+      40% { transform: rotate(8deg); }
+      60% { transform: rotate(-4deg); }
+      80% { transform: rotate(4deg); }
+    }
+
+    .call-btn:hover {
+      background-color: #0956a3;
+    }
+
+    .call-btn:hover .phone-icon {
+      animation-play-state: paused;
+    }
+  </style>
+</head>
+<body>
+  <div class="top-contact-info">
+    <div class="contact-details">
+      <a href="tel:+1234567890">
+        <i class="fas fa-phone"></i>
+        (123) 456-7890
+      </a>
+      <a href="mailto:info@primeestimating.com">
+        <i class="fas fa-envelope"></i>
+        info@primeestimating.com
+      </a>
+    </div>
+  </div>
+
+  <header>
+    <nav>
+      <div class="logo">
+        <h1>Prime Estimating</h1>
+      </div>
+      <ul class="nav-links">
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'services' %}">Services</a></li>
+        <li><a href="{% url 'pricing' %}">Pricing</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li><a href="{% url 'contact' %}">Contact</a></li>
+      </ul>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+  </header>
+
+  <section class="pricing-hero">
+    <div class="pricing-hero-content">
+      <h1>Transparent Pricing for Your Construction Estimating Needs</h1>
+      <p>Choose the perfect plan that fits your project's scope and budget</p>
+      <a href="#pricing-plans" class="btn">View Pricing Plans</a>
+    </div>
+  </section>
+
+  <section id="pricing-plans" class="pricing-section">
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <h3>Basic Plan</h3>
+        <div class="price">
+          $499<span>/project</span>
+        </div>
+        <ul class="features">
+          <li><i class="fas fa-check"></i> Material Takeoff</li>
+          <li><i class="fas fa-check"></i> Basic Cost Estimation</li>
+          <li><i class="fas fa-check"></i> Standard Report</li>
+          <li><i class="fas fa-check"></i> 48-Hour Turnaround</li>
+          <li><i class="fas fa-check"></i> Email Support</li>
+        </ul>
+        <a href="#" class="btn">Get Started</a>
+      </div>
+
+      <div class="pricing-card popular">
+        <h3>Professional Plan</h3>
+        <div class="price">
+          $999<span>/project</span>
+        </div>
+        <ul class="features">
+          <li><i class="fas fa-check"></i> Detailed Material Takeoff</li>
+          <li><i class="fas fa-check"></i> Advanced Cost Estimation</li>
+          <li><i class="fas fa-check"></i> Comprehensive Report</li>
+          <li><i class="fas fa-check"></i> 24-Hour Turnaround</li>
+          <li><i class="fas fa-check"></i> Priority Support</li>
+          <li><i class="fas fa-check"></i> 2 Revision Rounds</li>
+        </ul>
+        <a href="#" class="btn">Get Started</a>
+      </div>
+
+      <div class="pricing-card">
+        <h3>Enterprise Plan</h3>
+        <div class="price">
+          Custom<span>/project</span>
+        </div>
+        <ul class="features">
+          <li><i class="fas fa-check"></i> Complete Project Estimation</li>
+          <li><i class="fas fa-check"></i> Custom Reporting</li>
+          <li><i class="fas fa-check"></i> Dedicated Project Manager</li>
+          <li><i class="fas fa-check"></i> Priority Turnaround</li>
+          <li><i class="fas fa-check"></i> 24/7 Support</li>
+          <li><i class="fas fa-check"></i> Unlimited Revisions</li>
+        </ul>
+        <a href="#" class="btn">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <a href="tel:{{contactdetails.contnum}}">
+    <button class="call-btn">
+      <i class="fas fa-phone phone-icon"></i>
+    </button>
+  </a>
+
+  <script>
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>

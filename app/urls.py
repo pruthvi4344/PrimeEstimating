@@ -4,6 +4,7 @@ from django.urls import path
 urlpatterns = [
     path('', views.home, name='home'),
     path('services', views.services, name='services'),
+    path('pricing', views.pricing, name='pricing'),
     path('about', views.about, name='about'),
     path('contact', views.contact, name='contact'),
     path('adminpanel', views.adminpanel, name='adminpanel'),
@@ -23,5 +24,8 @@ urlpatterns = [
     path('aboutmanage/delete/', views.delete_aboutmanage, name='delete_aboutmanage'),
     path('contactmanage/edit/', views.edit_contactmanage, name='edit_contactmanage'),
     path('contactmanage/delete/', views.delete_contactmanage, name='delete_contactmanage'),
+    path('delete-corevalue/<int:id>/', views.delete_corevalue, name='delete_corevalue'),
+    path('edit-corevalue/<int:id>/', views.edit_corevalue, name='edit_corevalue'),
+
 
 ]

@@ -5,14 +5,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Prime Estimating - Services</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baskervville:ital@0;1&family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=Gilda+Display&family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&family=Pridi:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="icon" type="image/x-icon" href="{% static '/images/PE.png' %}">
+<style>
     html {
     scroll-behavior: smooth;
 }
 /* Global Styles */
 body {
   /* font-family: 'Roboto', sans-serif; */
+  font-family: 'Gilda Display', serif;
+
   margin: 0;
   padding: 0;
   color: #333;
@@ -403,54 +410,50 @@ nav a:hover {
   }
 }
 .call-btn {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background-color: #0D67B5;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s;
-}
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: #0D67B5;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s;
+      animation: pulse 2s infinite;
+    }
 
-.phone-icon {
-    color: white;
-    font-size: 24px;
-    animation: shake 1s ease-in-out infinite;
-}
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(13, 103, 181, 0.5); }
+      70% { box-shadow: 0 0 0 15px rgba(13, 103, 181, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(13, 103, 181, 0); }
+    }
 
-@keyframes shake {
-    0%, 100% { 
-        transform: rotate(0deg); 
+    .phone-icon {
+      color: white;
+      font-size: 24px;
+      animation: shake 1s ease-in-out infinite;
     }
-    20% { 
-        transform: rotate(-8deg); 
-    }
-    40% { 
-        transform: rotate(8deg); 
-    }
-    60% { 
-        transform: rotate(-4deg); 
-    }
-    80% { 
-        transform: rotate(4deg); 
-    }
-}
 
-.call-btn:hover {
-    background-color: #0956a3;
-}
+    @keyframes shake {
+      0%, 100% { transform: rotate(0deg); }
+      20% { transform: rotate(-8deg); }
+      40% { transform: rotate(8deg); }
+      60% { transform: rotate(-4deg); }
+      80% { transform: rotate(4deg); }
+    }
 
-/* Optional: Pause animation on hover */
-.call-btn:hover .phone-icon {
-    animation-play-state: paused;
-}
+    .call-btn:hover {
+      background-color: #0956a3;
+    }
+
+    .call-btn:hover .phone-icon {
+      animation-play-state: paused;
+    }
 
   </style>
 </head>
@@ -475,11 +478,11 @@ nav a:hover {
             </div>
      
             <ul class="nav-links">
-              <li><a href="{% url 'home'%}">Home</a></li>
-              <li><a href="{% url 'services'%}">Services</a></li>
-              <!-- <li><a href="#portfolio">Portfolio</a></li> -->
-              <li><a href="{% url 'about'%}">About</a></li>
-              <li><a href="{% url 'contact'%}">Contact</a></li>
+              <li><a href="{% url 'home' %}">Home</a></li>
+              <li><a href="{% url 'services' %}">Services</a></li>
+              <li><a href="{% url 'pricing' %}">Pricing</a></li>
+              <li><a href="{% url 'about' %}">About</a></li>
+              <li><a href="{% url 'contact' %}">Contact</a></li>
             </ul>
             <div class="hamburger">
               <span></span>

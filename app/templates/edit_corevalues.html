@@ -99,41 +99,24 @@
 </head>
 <body>
     <div class="container">
-        <h1>Edit About Story</h1>
+        <h1>Edit Our Core Values</h1>
         <form method="POST">
             {% csrf_token %}
-   
-            <div class="form-group">
-                <label for="detail">Description</label>
-                <textarea id="detail" name="story">{{ aboutdetails.story }}</textarea>
-            </div>
-            <div class="form-group">
-                <label>Years Of Experience</label>
-                <input type="number" name="experience" value="{{ aboutdetails.experience }}" >
-            </div>
-            <div class="form-group">
-                <label>Projects Completed</label>
-                <input type="number" name="procom" value="{{ aboutdetails.procom }}">
-            </div>
-            <div class="form-group">
-                <label>Client satisfaction</label>
-                <input type="number" name="satisfaction" value="{{ aboutdetails.satisfaction }}">
-            </div>
-            <br>
-            <label>Our Core Values</label>
+
+            
             <div class="form-group">
                 <label>title</label>
-                <input type="text" name="title" >
+                <input type="text" name="title" value="{{corevaluedetails.title}}">
             </div>
             <div class="form-group">
                 <label>detail</label>
-                <input type="text" name="detail" >
+                <input type="text" name="detail" value="{{corevaluedetails.detail}}">
             </div>
             <div class="form-group">
                 <label>Icon Class image name</label>
-                <input type="text" name="icon_class" >
+                <input type="text" name="icon_class" value="{{corevaluedetails.icon_class}}" >
             </div>
-            <button type="submit" class="btn">Update Service</button>
+            <button type="submit" class="btn">Update Core value</button>
             <a href="{% url 'adminpanel' %}" class="btn btn-cancel">Cancel</a>
         </form>
     </div>
