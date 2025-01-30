@@ -26,6 +26,8 @@ urlpatterns = [
     path('contactmanage/delete/', views.delete_contactmanage, name='delete_contactmanage'),
     path('delete-corevalue/<int:id>/', views.delete_corevalue, name='delete_corevalue'),
     path('edit-corevalue/<int:id>/', views.edit_corevalue, name='edit_corevalue'),
+    path('project/edit/<int:id>', views.edit_project, name='edit_project'),
+    path('project/delete/<int:id>', views.delete_project, name='delete_project'),
 
 
 ]

@@ -621,7 +621,7 @@
     <section id="portfolio" data-aos="fade-up">
       <h2>Our Projects</h2>
       <div class="project-grid">
-        <div class="project-card" data-aos="zoom-in" data-aos-duration="1000">
+        <!-- <div class="project-card" data-aos="zoom-in" data-aos-duration="1000">
           <img src="{% static 'images/project.jpg' %}" alt="Project 1">
           <h3>Commercial Building</h3>
           <p>Detailed estimating for a 20-story office complex.</p>
@@ -635,7 +635,14 @@
           <img src="{% static 'images/project.jpg' %}" alt="Project 3">
           <h3>Infrastructure Upgrade</h3>
           <p>Comprehensive estimating for a major highway expansion project.</p>
+        </div> -->
+        {%for projectdetail in projectdetails%}
+        <div class="project-card" data-aos="zoom-in" data-aos-duration="1000">
+          <img src="{{projectdetail.proimg.url}}" alt="{{projectdetail.name}}">
+          <h3>{{projectdetail.name}}</h3>
+          <p>{{projectdetail.detail}}</p>
         </div>
+        {%endfor%}
       </div>
     </section>
     <section id="about" data-aos="fade-up" data-aos-duration="1000">

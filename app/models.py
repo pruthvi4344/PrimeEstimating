@@ -11,7 +11,16 @@ class Service(models.Model):
     icon_class = models.CharField(max_length=100, default="fas fa-cogs")
     def __str__(self):
      return self.name
-    
+
+class Project(models.Model):
+   name = models.CharField(max_length=50)
+   detail = models.CharField(max_length=300)
+   proimg = models.ImageField(upload_to='projectimg/', blank=True, null=True)
+   def __str__(self):
+      return self
+      
+
+
 class About(models.Model):
    story = models.CharField(max_length=1000, blank=True, null=True)
    experience = models.IntegerField( blank=True, null=True)

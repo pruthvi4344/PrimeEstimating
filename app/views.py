@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .models import Service, Contact,Indexmanage,Servicemanage,Contactmanage,Aboutmanage,User,About,Corevalue
+from .models import Service, Contact,Indexmanage,Servicemanage,Project,Contactmanage,Aboutmanage,User,About,Corevalue
 from django.contrib import messages
 
 # Create your views here.
@@ -7,7 +7,12 @@ def home(request):
     servicesdetails = Service.objects.all()
     contactdetails = Contact.objects.first()
     indexmanagedetails = Indexmanage.objects.first()
-    return render(request, 'index.html',{'servicesdetails':servicesdetails,'contactdetails':contactdetails, 'indexmanagedetails':indexmanagedetails})
+    projectdetails = Project.objects.all()
+
+    return render(request, 'index.html',{'servicesdetails':servicesdetails,
+                                         'projectdetails':projectdetails,
+                                         'contactdetails':contactdetails,
+                                        'indexmanagedetails':indexmanagedetails})
 
 def services(request):
     servicesdetails = Service.objects.all()
@@ -68,6 +73,7 @@ def adminpanel(request):
         messages.error(request, 'You need to login.')
         return redirect('admin_login')
     servicesdetails = Service.objects.all()
+    projectdetails = Project.objects.all()
     corevaluedetails = Corevalue.objects.all()
     contactdetails = Contact.objects.first() 
     aboutdetails = About.objects.first()
@@ -101,6 +107,14 @@ def adminpanel(request):
             messages.success(request, 'Service added')
             return redirect('adminpanel')
         
+        elif form_type == 'project_form':
+            name = request.POST.get('name')
+            detail = request.POST.get('detail')
+            proimg = request.FILES.get('proimg')
+            Project.objects.create(name=name, detail=detail, proimg=proimg)
+            messages.success(request, 'Project added')
+            return redirect('adminpanel')
+        
         elif form_type == 'about_form':
             if aboutdetails:
              messages.error(request, "About details already exist. You can only edit or delete them.")
@@ -108,7 +122,7 @@ def adminpanel(request):
             story = request.POST.get('story')
             About.objects.create(story=story)
             messages.success(request, 'About information saved successfully.')
-            return redirect(adminpanel)
+            return redirect('adminpanel')
         
         
         elif form_type == 'indexmanage_form':
@@ -170,6 +184,7 @@ def adminpanel(request):
 
     return render(request, 'adminpanel.html', {'servicesdetails': servicesdetails,
                                                'contactdetails':contactdetails,
+                                               'projectdetails':projectdetails,
                                                'aboutdetails':aboutdetails,
                                                 'indexmanagedetails':indexmanagedetails,
                                                 'servicemanagedetails':servicemanagedetails,
@@ -410,4 +425,26 @@ def delete_corevalue(request,id):
     corevaluedetails = get_object_or_404(Corevalue, id=id)
     corevaluedetails.delete()
     messages.success(request, 'Core value deleted successfully.')
+    return redirect('adminpanel')
+
+def edit_project(request,id):
+    projectdetails = get_object_or_404(Project, id=id)
+
+    if request.method == 'POST':
+        projectdetails.name = request.POST.get('name')
+        projectdetails.detail = request.POST.get('detail')
+    
+            # Only update the image if a new one is uploaded
+        if 'proimg' in request.FILES:
+         projectdetails.proimg = request.FILES.get('proimg')
+
+        projectdetails.save()
+        messages.success(request, 'Project details updated successfully.')
+        return redirect('adminpanel')
+    return render(request, 'edit_project.html',{'projectdetails':projectdetails})
+
+def delete_project(request, id):
+    projectdetails = get_object_or_404(Project, id=id)
+    projectdetails.delete()
+    messages.success(request, 'Project details deleted Successfully.')
     return redirect('adminpanel')
