@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .models import Service, Contact,Indexmanage,Servicemanage,Project,Contactmanage,Aboutmanage,User,About,Corevalue
+from .models import Service, Contact,Indexmanage,Servicemanage,Pricingmanage,Project,Contactmanage,Aboutmanage,User,About,Corevalue
 from django.contrib import messages
+from django.core.mail import send_mail
 
 # Create your views here.
 def home(request):
@@ -8,6 +9,26 @@ def home(request):
     contactdetails = Contact.objects.first()
     indexmanagedetails = Indexmanage.objects.first()
     projectdetails = Project.objects.all()
+
+    # if request.method== 'POST':
+    #     name = request.POST.get('name')
+    #     email = request.POST.get('email')
+    #     message = request.POST.get('message')
+       
+
+    #     subject = "New Contact Form Submission"
+    #     email_message = f"Name: {name}\nEmail: {email}\nMessage: {message}"
+    #     from_email = 'hurrymargen@gmail.com'
+    #     recipient_list = ['hurrymargen@gmail.com']  # Replace with your email
+        
+    #     try:
+    #         send_mail(subject, email_message, from_email, recipient_list)
+    #         messages.success(request, 'Your message has been sent successfully!')
+    #     except Exception as e:
+    #         messages.error(request, f"Failed to send email: {e}")
+
+
+    #     return redirect('home')
 
     return render(request, 'index.html',{'servicesdetails':servicesdetails,
                                          'projectdetails':projectdetails,
@@ -21,7 +42,11 @@ def services(request):
     return render(request, 'services.html',{'servicesdetails':servicesdetails,'contactdetails':contactdetails,'servicemanagedetails':servicemanagedetails} )
 
 def pricing(request):
-    return render(request, 'pricing.html')
+    contactdetails = Contact.objects.first()
+    pricingmanagedetails = Pricingmanage.objects.first()
+    return render(request, 'pricing.html',{'contactdetails':contactdetails,
+                                           'pricingmanagedetails':pricingmanagedetails,
+                                           })
 
 def about(request):
     corevaluedetails = Corevalue.objects.all()
@@ -79,6 +104,7 @@ def adminpanel(request):
     aboutdetails = About.objects.first()
     indexmanagedetails = Indexmanage.objects.first()
     servicemanagedetails = Servicemanage.objects.first()
+    pricingmanagedetails = Pricingmanage.objects.first()
     aboutmanagedetails = Aboutmanage.objects.first()
     contactmanagedetails = Contactmanage.objects.first()
     
@@ -120,7 +146,10 @@ def adminpanel(request):
              messages.error(request, "About details already exist. You can only edit or delete them.")
              return redirect('adminpanel')
             story = request.POST.get('story')
-            About.objects.create(story=story)
+            experience = request.POST.get('experience')
+            procom = request.POST.get('procom')
+            satisfaction = request.POST.get('satisfaction')
+            About.objects.create(story=story, experience=experience, procom=procom, satisfaction=satisfaction)
             messages.success(request, 'About information saved successfully.')
             return redirect('adminpanel')
         
@@ -147,6 +176,18 @@ def adminpanel(request):
             background_image = request.FILES.get('wimg')
             Servicemanage.objects.create(title=title, line=line, button_text=button_text, background_image=background_image)
             messages.success(request, 'Service page details saved successfully.')
+            return redirect('adminpanel')
+        
+        elif form_type == 'pricingmanage_form':
+            if pricingmanagedetails:
+             messages.error(request, "Pricing welcome details already exist. You can only edit or delete them.")
+             return redirect('adminpanel')
+            title = request.POST.get('wtitle')
+            line = request.POST.get('wline')
+            button_text = request.POST.get('wbtn')
+            background_image = request.FILES.get('wimg')
+            Pricingmanage.objects.create(title=title, line=line, button_text=button_text, background_image=background_image)
+            messages.success(request, 'Pricing page details saved successfully.')
             return redirect('adminpanel')
         
         elif form_type == 'aboutmanage_form':
@@ -188,6 +229,7 @@ def adminpanel(request):
                                                'aboutdetails':aboutdetails,
                                                 'indexmanagedetails':indexmanagedetails,
                                                 'servicemanagedetails':servicemanagedetails,
+                                                'pricingmanagedetails':pricingmanagedetails,
                                                 'aboutmanagedetails':aboutmanagedetails,
                                                 'contactmanagedetails':contactmanagedetails,
                                                 'corevaluedetails': corevaluedetails,
@@ -237,7 +279,16 @@ def edit_about(request):
     return render(request, 'edit_about.html',{'aboutdetails':aboutdetails})
 
 def delete_about(request):
-    pass
+    aboutdetails = About.objects.first()    
+    if aboutdetails:
+        aboutdetails.delete()
+        messages.success(request, 'deleted successfully.')   
+    else:
+        messages.error(request, "No details found to delete.")
+    return redirect('adminpanel')
+    
+
+
 
 def edit_contact(request):
     contact = Contact.objects.first()
@@ -336,6 +387,38 @@ def delete_servicemanage(request):
     else:
         messages.error(request,'No service manage details found to delete.')
     return redirect('adminpanel')
+
+def edit_pricingmanage(request):
+    pricingmanagedetails = Pricingmanage.objects.first()
+    if pricingmanagedetails:
+        if request.method == 'POST':
+            pricingmanagedetails.title = request.POST.get('wtitle')
+            pricingmanagedetails.line = request.POST.get('wline')
+            pricingmanagedetails.button_text = request.POST.get('wbtn')
+
+            # Only update the image if a new one is uploaded
+            if 'wimg' in request.FILES:
+             pricingmanagedetails.background_image = request.FILES.get('wimg')
+
+            pricingmanagedetails.save()
+            messages.success(request, 'Pricing manage page details updated successfully.')
+            return redirect('adminpanel')
+        
+    else:
+            messages.error(request, 'First add details')
+            return redirect('adminpanel')
+    return render(request,'edit_pricingmanage.html',{'pricingmanagedetails':pricingmanagedetails})
+
+def delete_pricingmanage(request):
+    pricingmanagedetails = Pricingmanage.objects.first()    
+    if pricingmanagedetails:
+        pricingmanagedetails.delete()
+        messages.success(request, 'deleted successfully.')   
+    else:
+        messages.error(request, "No details found to delete.")
+    return redirect('adminpanel')
+
+
 
 def edit_aboutmanage(request):
     aboutmanagedetails = Aboutmanage.objects.first()

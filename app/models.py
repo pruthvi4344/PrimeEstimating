@@ -53,6 +53,12 @@ class Servicemanage(models.Model):
     button_text = models.CharField(max_length=10)
     background_image = models.ImageField(upload_to='servicewelcome/', blank=True, null=True)
 
+class Pricingmanage(models.Model):
+    title = models.CharField(max_length=50)
+    line = models.CharField(max_length=100)
+    button_text = models.CharField(max_length=10)
+    background_image = models.ImageField(upload_to='servicewelcome/', blank=True, null=True)
+
 class Aboutmanage(models.Model):
     title = models.CharField(max_length=50)
     line = models.CharField(max_length=100)

@@ -272,6 +272,7 @@
         <li><a href="#" onclick="showSection('contact')"><i class="fas fa-envelope"></i> <span>Contact</span></a></li>
         <li><a href="#" onclick="showSection('indexmanage')"><i class="fas fa-home"></i> <span>Index welcome Manage</span></a></li>
         <li><a href="#" onclick="showSection('servicemanage')"><i class="fas fa-tasks"></i> <span>Service welcome Manage</span></a></li>
+        <li><a href="#" onclick="showSection('pricingmanage')"><i class="fas fa-dollar-sign"></i> <span>Pricing welcome Manage</span></a></li>
         <li><a href="#" onclick="showSection('aboutmanage')"><i class="fas fa-info-circle"></i> <span>About welcome Manage</span></a></li>
         <li><a href="#" onclick="showSection('contactmanage')"><i class="fas fa-user"></i> <span>Contact welcome Manage</span></a></li>
         <li><a href="#" onclick="showSection('corevalue')"><i class="fas fa-info-circle"></i> <span>About/ Our Core Values.</span></a></li>
@@ -421,35 +422,28 @@
                     <label>Client satisfaction</label>
                     <input type="number" name="satisfaction" required>
                 </div>
-                <br>
-                <label>Our Core Values</label>
-                <div class="form-group">
-                    <label>title</label>
-                    <input type="text" name="title" required>
-                </div>
-                <div class="form-group">
-                    <label>detail</label>
-                    <input type="text" name="detail" required>
-                </div>
-                <div class="form-group">
-                    <label>Icon Class image name</label>
-                    <input type="text" name="icon_class" required>
-                </div>
+                
                 <button type="submit" class="btn">Update About</button>
             </form>
             <table class="data-table">
                 <thead>
                     <tr>
                         <th>Story</th>
+                        <th>Experience</th>
+                        <th>Project Completed</th>
+                        <th>Client Satisfaction</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>{{aboutdetails.story}}</td>
+                        <td>{{aboutdetails.experience}}</td>
+                        <td>{{aboutdetails.procom}}</td>
+                        <td>{{aboutdetails.satisfaction}}</td>
                         <td>
                             <a href="{% url 'edit_about' %}" ><button class="btn">Edit</button></a>
-                            <button class="btn">Delete</button>
+                            <a href="{% url 'delete_about' %}" ><button class="btn" onclick="return confirm('Are you sure you want to delete this details?');">Delete</button></a>
                         </td>
                     </tr>
                 </tbody>
@@ -604,6 +598,57 @@
                         <td>
                             <a href="{% url 'edit_servicemanage' %}" style="text-decoration: none;" > <button class="btn">Edit</button> </a>
                             <a href="{% url 'delete_servicemanage' %}"  onclick="return confirm('Are you sure you want to delete this contact?');"><button class="btn">Delete</button></a>
+                        </td>
+                    </tr>
+                   
+                </tbody>
+            </table>
+        </div>
+        <!-- Pricing welcome manage  -->
+        <div id="pricingmanage" class="section card" style="display:none;">
+            <h2>Pricing Page Management</h2>
+            <form id="contactForm" method="POST" enctype="multipart/form-data">
+                {%csrf_token%}
+                <input type="hidden" name="form_type" value="pricingmanage_form">
+                <div class="form-group">
+                    <label>Welcome title</label>
+                    <input type="text" name="wtitle" required>
+                </div>
+                <div class="form-group">
+                    <label>Welcome Line</label>
+                    <input type="text" name="wline" required>
+                </div>
+                <div class="form-group">
+                    <label>Welcome button Name</label>
+                    <input type="text" name="wbtn" required>
+                </div>
+                <div class="form-group">
+                    <label>Welcome Background Image</label>
+                    <input type="file" name="wimg" required>
+                </div>
+                <button type="submit" class="btn">Save</button>
+            </form>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Line</th>
+                        <th>Button text</th>
+                        <th>Bg Image</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        <td>{{pricingmanagedetails.title}}</td>
+                        <td>{{pricingmanagedetails.line}}</td>
+                        <td>{{pricingmanagedetails.button_text}}</td>
+                        <td><img src="{{ pricingmanagedetails.background_image.url }}" alt="Current Image" style="width: 150px; height: auto; display: block;"></td>
+                        
+                        <td>
+                            <a href="{% url 'edit_pricingmanage' %}" style="text-decoration: none;" > <button class="btn">Edit</button> </a>
+                            <a href="{% url 'delete_pricingmanage' %}"  onclick="return confirm('Are you sure you want to delete this details?');"><button class="btn">Delete</button></a>
                         </td>
                     </tr>
                    

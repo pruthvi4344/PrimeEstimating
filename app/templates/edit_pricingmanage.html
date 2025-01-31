@@ -99,31 +99,38 @@
 </head>
 <body>
     <div class="container">
-        <h1>Edit About Story</h1>
-        <form method="POST">
+        <h1>Edit About Page Details</h1>
+        <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-   
             <div class="form-group">
-                <label for="detail">Description</label>
-                <textarea id="detail" name="story">{{ aboutdetails.story }}</textarea>
+                <label for="title">Welcome Title</label>
+                <input type="text" id="title" name="wtitle" value="{{ pricingmanagedetails.title }}">
             </div>
             <div class="form-group">
-                <label>Years Of Experience</label>
-                <input type="number" name="experience" value="{{ aboutdetails.experience }}" >
+                <label for="detail">Welcome Line</label>
+                <input type="text" id="title" name="wline" value="{{ pricingmanagedetails.line }}">
             </div>
             <div class="form-group">
-                <label>Projects Completed</label>
-                <input type="number" name="procom" value="{{ aboutdetails.procom }}">
+                <label for="detail">Welcome Button Text</label>
+                <input type="text" id="title" name="wbtn" value="{{ pricingmanagedetails.button_text }}">
             </div>
             <div class="form-group">
-                <label>Client satisfaction</label>
-                <input type="number" name="satisfaction" value="{{ aboutdetails.satisfaction }}">
+                <label>Current Background Image</label>
+                {% if pricingmanagedetails.background_image %}
+                    <img src="{{ pricingmanagedetails.background_image.url }}" alt="Current Image" style="width: 150px; height: auto; display: block;">
+                    <p>{{ pricingmanagedetails.background_image }}</p>  <!-- Display File Name -->
+                {% else %}
+                    <p>No image uploaded</p>
+                {% endif %}
             </div>
-            <br>
-            
-            <button type="submit" class="btn">Update Details </button>
+            <div class="form-group">
+                <label>Welcome Background Image</label>
+                <input type="file" name="wimg" value="{{ pricingmanagedetails.background_image }}" > 
+            </div>    
+            <button type="submit" class="btn">Save Changes</button>
             <a href="{% url 'adminpanel' %}" class="btn btn-cancel">Cancel</a>
         </form>
     </div>
 </body>
 </html>
+

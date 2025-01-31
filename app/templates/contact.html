@@ -112,8 +112,8 @@ a {
 /* Header Styles */
 header {
   background-color: #0D67B5;
-  padding: 20px;
-  position: sticky;
+  padding: 8px 20px;
+    position: sticky;
   top: 37px;
   z-index: 100;
 }
@@ -122,6 +122,9 @@ header {
   header {
     top: 62.5px;
   }
+  .logo-img {
+    height: 40px; /* Slightly smaller logo on mobile */
+  }
 }
 nav {
   display: flex;
@@ -129,10 +132,15 @@ nav {
   align-items: center;
 }
 
-.logo h1 {
-  color: #fff;
-  margin: 0;
-  font-size: 24px;
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  height: 50px; /* Adjust this value based on your desired logo size */
+  width: auto;
+  object-fit: contain;
 }
 
 nav ul {
@@ -294,21 +302,28 @@ nav a:hover {
     }
 
     /* Hamburger Menu and Responsive Styles */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-      gap: 5px;
-      z-index: 101;
-    }
-
-    .hamburger span {
-      display: block;
-      width: 25px;
-      height: 3px;
-      background-color: #fff;
-      transition: all 0.3s ease;
-    }
+         /* Add these styles to your CSS */
+         .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 10;
+        }
+        
+        .hamburger span {
+            width: 100%;
+            height: 3px;
+            background: #fff;
+            border-radius: 10px;
+            transition: all 0.3s linear;
+        }
+        
 
     /* Media Queries for Responsiveness */
     @media (max-width: 768px) {
@@ -330,30 +345,45 @@ nav a:hover {
       }
 
       .hamburger {
-        display: flex;
+                display: flex;
+            }
+        
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                background: rgb(46 106 184 / 94%);
+                padding: 20px;
+                gap: 15px;
+                align-items: center;
+                border-bottom: 1px solid rgba(25, 125, 255, 0.504);
+            }
+        
+            .nav-links.active {
+                display: flex;
+            }
+        
+            .hamburger.active span:first-child {
+                transform: rotate(45deg) translate(6px, 6px);
+            }
+        
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+        
+            .hamburger.active span:last-child {
+                transform: rotate(-45deg) translate(6px, -6px);
+            }
+            .nav-links a {
+        color: #fff;
+        font-size: 18px;
+        font-family: 'Playfair Display', serif;
       }
-
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 68px;
-        right: 6px;
-        width: 134px;
-        background-color: #0D67B5;
-        border-radius: 8px;
-        align-items: center;
-        padding: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        z-index: 100;
-      }
-
-      .nav-links.active {
-        display: flex;
-      }
-
       .nav-links li {
-        margin: 10px 0;
+        margin-left:  0px;
       }
       .contact-info h2{
         text-align: center;
@@ -441,7 +471,9 @@ nav a:hover {
   <header>
     <nav>
       <div class="logo">
-        <h1>Prime Estimating</h1>
+        <a href="{% url 'home' %}">
+          <img src="{% static 'images/logo.png' %}" alt="Prime Estimating Logo" class="logo-img">
+        </a>
       </div>
       
       <ul class="nav-links">
@@ -451,11 +483,17 @@ nav a:hover {
         <li><a href="{% url 'about' %}">About</a></li>
         <li><a href="{% url 'contact' %}">Contact</a></li>
       </ul>
-      <div class="hamburger">
+      <div class="hamburger" onclick="toggleMenu()">
         <span></span>
         <span></span>
         <span></span>
       </div>
+      <script>
+        function toggleMenu() {
+            document.getElementById('nav-menu').classList.toggle('active');
+            document.querySelector('.hamburger').classList.toggle('active');
+        }
+        </script>
     </nav>
   </header>
 

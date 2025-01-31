@@ -55,11 +55,19 @@
 
     header {
       background-color: #0D67B5;
-      padding: 20px;
-      position: sticky;
+      padding: 8px 20px;
+            position: sticky;
       top: 37px;
       z-index: 100;
     }
+    @media (max-width: 768px) {
+  header {
+    top: 62.5px;
+  }
+  .logo-img {
+    height: 40px; /* Slightly smaller logo on mobile */
+  }
+}
 
     nav {
       display: flex;
@@ -67,11 +75,16 @@
       align-items: center;
     }
 
-    .logo h1 {
-      color: #fff;
-      margin: 0;
-      font-size: 24px;
-    }
+    .logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  height: 50px; /* Adjust this value based on your desired logo size */
+  width: auto;
+  object-fit: contain;
+}
 
     .nav-links {
       display: flex;
@@ -92,7 +105,7 @@
 
     /* Pricing Hero Section */
     .pricing-hero {
-      background-image: url('/api/placeholder/1200/400');
+      background-image: url('{{pricingmanagedetails.background_image.url}}');
       background-size: cover;
       background-position: center;
       color: white;
@@ -111,7 +124,16 @@
       bottom: 0;
       background: rgba(13, 103, 181, 0.7);
     }
-
+    .pricing-hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      
+    }
+    .pricing-hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      
+    }
     .pricing-hero-content {
       position: relative;
       z-index: 10;
@@ -276,54 +298,71 @@
     }
 
     /* Hamburger Menu */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-      gap: 5px;
-      z-index: 101;
-    }
-
-    .hamburger span {
-      display: block;
-      width: 25px;
-      height: 3px;
-      background-color: #fff;
-      transition: all 0.3s ease;
-    }
-
-    @media (max-width: 700px) {
-      .hamburger {
-        display: flex;
-      }
-
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 68px;
-        right: 6px;
-        width: 134px;
-        background-color: #0D67B5;
-        border-radius: 8px;
-        align-items: center;
-        padding: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        z-index: 100;
-      }
-
-      .nav-links.active {
-        display: flex;
-      }
-
-      .nav-links li {
-        margin: 10px 0;
-      }
-
-      .nav-links a {
+         /* Add these styles to your CSS */
+         .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 9000;
+        }
+        
+        .hamburger span {
+            width: 100%;
+            height: 3px;
+            background: #fff;
+            border-radius: 10px;
+            transition: all 0.3s linear;
+        }
+        
+        @media (max-width: 680px) {
+            .hamburger {
+                display: flex;
+            }
+        
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                background: rgb(46 106 184 / 94%);
+                padding: 20px;
+                gap: 15px;
+                align-items: center;
+                border-bottom: 1px solid rgba(25, 125, 255, 0.504);
+            }
+        
+            .nav-links.active {
+                display: flex;
+            }
+        
+            .hamburger.active span:first-child {
+                transform: rotate(45deg) translate(6px, 6px);
+            }
+        
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+        
+            .hamburger.active span:last-child {
+                transform: rotate(-45deg) translate(6px, -6px);
+            }
+            .nav-links a {
+        color: #fff;
         font-size: 18px;
+        font-family: 'Playfair Display', serif;
       }
-    }
+      .nav-links li {
+        margin-left:  0px;
+      }
+        }
     .call-btn {
       position: fixed;
       bottom: 30px;
@@ -374,13 +413,13 @@
 <body>
   <div class="top-contact-info">
     <div class="contact-details">
-      <a href="tel:+1234567890">
+      <a href="tel:{{contactdetails.contnum}}">
         <i class="fas fa-phone"></i>
-        (123) 456-7890
+        {{contactdetails.contnum}}
       </a>
-      <a href="mailto:info@primeestimating.com">
+      <a href="mailto:{{contactdetails.email}}">
         <i class="fas fa-envelope"></i>
-        info@primeestimating.com
+        {{contactdetails.email}}
       </a>
     </div>
   </div>
@@ -388,7 +427,9 @@
   <header>
     <nav>
       <div class="logo">
-        <h1>Prime Estimating</h1>
+        <a href="{% url 'home' %}">
+          <img src="{% static 'images/logo.png' %}" alt="Prime Estimating Logo" class="logo-img">
+        </a>
       </div>
       <ul class="nav-links">
         <li><a href="{% url 'home' %}">Home</a></li>
@@ -397,25 +438,36 @@
         <li><a href="{% url 'about' %}">About</a></li>
         <li><a href="{% url 'contact' %}">Contact</a></li>
       </ul>
-      <div class="hamburger">
+      <div class="hamburger" onclick="toggleMenu()">
         <span></span>
         <span></span>
         <span></span>
       </div>
+      <script>
+        function toggleMenu() {
+            document.getElementById('nav-menu').classList.toggle('active');
+            document.querySelector('.hamburger').classList.toggle('active');
+        }
+        </script>
     </nav>
   </header>
 
   <section class="pricing-hero">
-    <div class="pricing-hero-content">
+    <!-- <div class="pricing-hero-content">
       <h1>Transparent Pricing for Your Construction Estimating Needs</h1>
       <p>Choose the perfect plan that fits your project's scope and budget</p>
       <a href="#pricing-plans" class="btn">View Pricing Plans</a>
+    </div> -->
+    <div class="pricing-hero-content">
+      <h1 data-aos="fade-right"  data-aos-duration="2100">{{pricingmanagedetails.title}}</h1>
+      <p data-aos="fade-left" data-aos-duration="2000">{{pricingmanagedetails.line}}</p>
+      <a data-aos="fade-up" data-aos-duration="2000" href="#pricing-plans" class="btn">{{pricingmanagedetails.button_text}}</a>
     </div>
   </section>
 
   <section id="pricing-plans" class="pricing-section">
     <div class="pricing-grid">
-      <div class="pricing-card">
+      <div class="pricing-card" data-aos="zoom-in" data-aos-duration="1000">
         <h3>Basic Plan</h3>
         <div class="price">
           $499<span>/project</span>
@@ -430,7 +482,7 @@
         <a href="#" class="btn">Get Started</a>
       </div>
 
-      <div class="pricing-card popular">
+      <div class="pricing-card popular" data-aos="zoom-in" data-aos-duration="1000">
         <h3>Professional Plan</h3>
         <div class="price">
           $999<span>/project</span>
@@ -446,7 +498,7 @@
         <a href="#" class="btn">Get Started</a>
       </div>
 
-      <div class="pricing-card">
+      <div class="pricing-card" data-aos="zoom-in" data-aos-duration="1000">
         <h3>Enterprise Plan</h3>
         <div class="price">
           Custom<span>/project</span>
@@ -469,8 +521,9 @@
       <i class="fas fa-phone phone-icon"></i>
     </button>
   </a>
-
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>
+    AOS.init();
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
     

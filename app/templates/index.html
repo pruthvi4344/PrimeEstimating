@@ -7,8 +7,9 @@
   <title>Prime Estimating</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Baskervville:ital@0;1&family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=Gilda+Display&family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&family=Pridi:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Baskervville:ital@0;1&family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=Gilda+Display&family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&family=Oswald:wght@200..700&family=Pridi:wght@200;300;400;500;600;700&display=swap" rel="stylesheet"  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   <link rel="icon" type="image/x-icon" href="{% static '/images/PE.png' %}">
   <style>
@@ -20,6 +21,7 @@
       margin: 0;
       padding: 0;
       font-family: 'Gilda Display', serif;
+      /* font-family: 'Oswald', sans-serif; */
       color: #333;
     }
 
@@ -94,7 +96,7 @@
 
     header {
       background-color: #0D67B5;
-      padding: 20px;
+      padding: 8px 20px;
       position: sticky;
       top: 37px;
       z-index: 100;
@@ -104,6 +106,9 @@
       header {
         top: 62.5px;
       }
+      .logo-img {
+    height: 40px; /* Slightly smaller logo on mobile */
+  }
     }
 
     nav {
@@ -112,11 +117,16 @@
       align-items: center;
     }
 
-    .logo h1 {
-      color: #fff;
-      margin: 0;
-      font-size: 24px;
-    }
+    .logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  height: 50px; /* Adjust this value based on your desired logo size */
+  width: auto;
+  object-fit: contain;
+}
 
     nav ul {
       display: flex;
@@ -450,42 +460,73 @@
       }
     }
 
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-      gap: 5px;
-      z-index: 101;
-    }
+         /* Add these styles to your CSS */
+         .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 10;
+        }
+        
+        .hamburger span {
+            width: 100%;
+            height: 3px;
+            background: #fff;
+            border-radius: 10px;
+            transition: all 0.3s linear;
+        }
+        
+        @media (max-width: 680px) {
+            .hamburger {
+                display: flex;
+            }
+        
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                background: rgb(46 106 184 / 94%);
+                padding: 20px;
+                gap: 15px;
+                align-items: center;
+                border-bottom: 1px solid rgba(25, 125, 255, 0.504);
+            }
+        
+            .nav-links.active {
+                display: flex;
+            }
+        
+            .hamburger.active span:first-child {
+                transform: rotate(45deg) translate(6px, 6px);
+            }
+        
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+        
+            .hamburger.active span:last-child {
+                transform: rotate(-45deg) translate(6px, -6px);
+            }
+            .nav-links a {
+        color: #fff;
+        font-size: 18px;
+        font-family: 'Playfair Display', serif;
+      }
+      .nav-links li {
+        margin-left:  0px;
+      }
+        }
 
-    .hamburger span {
-      display: block;
-      width: 25px;
-      height: 3px;
-      background-color: #fff;
-      transition: all 0.3s ease;
-    }
-
-    .hamburger.active span:nth-child(1) {
-      transform: rotate(45deg) translate(6px, 5px);
-    }
-
-    .hamburger.active span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .hamburger.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(6px, -6px);
-    }
-
-    .nav-links {
-      display: flex;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    @media (max-width: 700px) {
+    /* @media (max-width: 700px) {
       .hamburger {
         display: flex;
       }
@@ -518,7 +559,7 @@
         font-size: 18px;
         font-family: 'Playfair Display', serif;
       }
-    }
+    } */
 
     .call-btn {
       position: fixed;
@@ -536,6 +577,8 @@
       justify-content: center;
       transition: background-color 0.3s;
       animation: pulse 2s infinite;
+      position: fixed  !important;
+      z-index: 1000;
     }
 
     @keyframes pulse {
@@ -583,20 +626,28 @@
   <header>
     <nav>
       <div class="logo">
-        <h1>Prime Estimating</h1>
+        <a href="{% url 'home' %}">
+          <img src="{% static 'images/logo.png' %}" alt="Prime Estimating Logo" class="logo-img">
+        </a>
       </div>
-      <ul class="nav-links">
+      <ul class="nav-links" id="nav-menu">
         <li><a href="{% url 'home' %}">Home</a></li>
         <li><a href="{% url 'services' %}">Services</a></li>
         <li><a href="{% url 'pricing' %}">Pricing</a></li>
         <li><a href="{% url 'about' %}">About</a></li>
         <li><a href="{% url 'contact' %}">Contact</a></li>
       </ul>
-      <div class="hamburger">
+      <div class="hamburger" onclick="toggleMenu()">
         <span></span>
         <span></span>
         <span></span>
       </div>
+      <script>
+        function toggleMenu() {
+            document.getElementById('nav-menu').classList.toggle('active');
+            document.querySelector('.hamburger').classList.toggle('active');
+        }
+        </script>
     </nav>
   </header>
   <main>
@@ -706,13 +757,13 @@
   <script>
     AOS.init();
     // Hamburger menu toggle
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
+    // const hamburger = document.querySelector('.hamburger');
+    // const navLinks = document.querySelector('.nav-links');
 
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
-      navLinks.classList.toggle('active');
-    });
+    // hamburger.addEventListener('click', () => {
+    //   hamburger.classList.toggle('active');
+    //   navLinks.classList.toggle('active');
+    // });
   </script>
 </body>
 </html>
