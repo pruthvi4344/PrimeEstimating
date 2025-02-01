@@ -12,3 +12,10 @@ admin.site.register(Contactmanage)
 admin.site.register(About)
 admin.site.register(Corevalue)
 admin.site.register(Project)
+
+from .models import PricingPlan
+
+@admin.register(PricingPlan)
+class PricingPlanAdmin(admin.ModelAdmin):
+    list_display = ("name", "price", "most_popular")
+    search_fields = ("name", "price")

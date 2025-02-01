@@ -276,6 +276,8 @@
         <li><a href="#" onclick="showSection('aboutmanage')"><i class="fas fa-info-circle"></i> <span>About welcome Manage</span></a></li>
         <li><a href="#" onclick="showSection('contactmanage')"><i class="fas fa-user"></i> <span>Contact welcome Manage</span></a></li>
         <li><a href="#" onclick="showSection('corevalue')"><i class="fas fa-info-circle"></i> <span>About/ Our Core Values.</span></a></li>
+        <li><a href="#" onclick="showSection('plans')"><i class="fas fa-dollar-sign"></i> <span>Plans</span></a></li>
+
         <li><a href="{%url 'admin_logout'%}" onclick="return confirm('Are you sure you want to logout?');"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a></li>
     </ul>
 </div>
@@ -346,6 +348,75 @@
 
 
 
+
+
+        <div id="plans" class="section card" style="display:none;">
+            <h2>Pricing Plans Management</h2>
+            <form id="planForm" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="form_type" value="plan_form">
+                <div class="form-group">
+                    <label>Plan Name</label>
+                    <input type="text" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label>Price</label>
+                    <input type="number" name="price" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label>Features (comma-separated)</label>
+                    <textarea name="features" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Button Text</label>
+                    <input type="text" name="button_text" placeholder="e.g., Contact us">
+                </div>
+                <div class="form-group">
+                    <label>Button Link</label>
+                    <input type="url" name="button_link" placeholder="e.g., https://example.com/subscribe">
+                </div>
+                <div class="form-group">
+                    <label>Most Popular</label>
+                    <select name="most_popular">
+                        <option value="False">No</option>
+                        <option value="True">Yes</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">Save Plan</button>
+            </form>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Features</th>
+                        <th>Most Popular</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for plan in plans %}
+                    <tr>
+                        <td>{{ plan.name }}</td>
+                        <td>{{ plan.price }}</td>
+                        <td>{{ plan.features|truncatechars:80 }}</td>
+                        <td>{{ plan.most_popular|yesno:"Yes,No" }}</td>
+                        <td>
+                            <a href="{% url 'edit_pricing_plan' plan.id %}"><button class="btn">Edit</button></a>
+                            <a href="{% url 'delete_pricing_plan' plan.id %}" onclick="return confirm('Are you sure you want to delete this plan?');">
+                                <button class="btn">Delete</button>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+
+
+
+
         <div id="project" class="section card" style="display:none;">
             <h2>Project Management</h2>
             <form id="contactForm" method="POST" enctype="multipart/form-data">
@@ -403,12 +474,17 @@
 
         <div id="about" class="section card" style="display:none;">
             <h2>About Management</h2>
-            <form id="aboutForm" method="POST">
+            <form id="aboutForm" method="POST" enctype="multipart/form-data">
                 {%csrf_token%}
                 <input type="hidden" name="form_type" value="about_form">
                 <div class="form-group">
                     <label>Company Story</label>
                     <textarea name="story" required></textarea>
+                    <textarea name="story2" ></textarea>
+                </div>
+                <div class="form-group">
+                    <label>About Image(optional)</label>
+                    <input type="file" name="about_image" >
                 </div>
                 <div class="form-group">
                     <label>Years Of Experience</label>
@@ -428,7 +504,9 @@
             <table class="data-table">
                 <thead>
                     <tr>
-                        <th>Story</th>
+                        <th>Story Paragraph 1</th>
+                        <th>Story Paragraph 2</th>
+                        <th>About Image</th>
                         <th>Experience</th>
                         <th>Project Completed</th>
                         <th>Client Satisfaction</th>
@@ -438,6 +516,12 @@
                 <tbody>
                     <tr>
                         <td>{{aboutdetails.story}}</td>
+                        <td>{{aboutdetails.story2}}</td>
+                        {%if aboutdetails.about_image %}
+                        <td><img src="{{ aboutdetails.about_image.url }}" alt="Current Image" style="width: 150px; height: auto; display: block;"></td>
+                        {%else%}
+                        <td>No Image Uploaded</td>
+                        {%endif%}
                         <td>{{aboutdetails.experience}}</td>
                         <td>{{aboutdetails.procom}}</td>
                         <td>{{aboutdetails.satisfaction}}</td>

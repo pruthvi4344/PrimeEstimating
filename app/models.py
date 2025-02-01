@@ -23,6 +23,8 @@ class Project(models.Model):
 
 class About(models.Model):
    story = models.CharField(max_length=1000, blank=True, null=True)
+   story2 = models.CharField(max_length=1000, blank=True, null=True)
+   about_image = models.ImageField(upload_to='aboutimg/', blank=True, null=True)
    experience = models.IntegerField( blank=True, null=True)
    procom = models.IntegerField( blank=True, null=True)
    satisfaction = models.IntegerField( blank=True, null=True)
@@ -70,3 +72,17 @@ class Contactmanage(models.Model):
     line = models.CharField(max_length=100)
     button_text = models.CharField(max_length=10)
     background_image = models.ImageField(upload_to='contactwelcome/', blank=True, null=True)
+
+class PricingPlan(models.Model):
+    name = models.CharField(max_length=100)
+    price = models.CharField(max_length=50, help_text="Use 'Custom' for variable pricing")
+    features = models.TextField(help_text="Enter features separated by commas")
+    button_text = models.CharField(max_length=50, default="Get Started")
+    button_link = models.URLField(default="#")
+    most_popular = models.BooleanField(default=False)
+
+    def get_features_list(self):
+        return self.features.split(",")
+
+    def __str__(self):
+        return self.name

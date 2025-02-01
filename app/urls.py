@@ -30,6 +30,10 @@ urlpatterns = [
     path('edit-corevalue/<int:id>/', views.edit_corevalue, name='edit_corevalue'),
     path('project/edit/<int:id>', views.edit_project, name='edit_project'),
     path('project/delete/<int:id>', views.delete_project, name='delete_project'),
+    path("adminpanel/plans/edit/<int:plan_id>/", views.edit_pricing_plan, name="edit_pricing_plan"),
+    path("adminpanel/plans/delete/<int:plan_id>/", views.delete_pricing_plan, name="delete_pricing_plan"),
+
+    
 
 
 ]

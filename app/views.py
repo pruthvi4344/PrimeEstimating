@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .models import Service, Contact,Indexmanage,Servicemanage,Pricingmanage,Project,Contactmanage,Aboutmanage,User,About,Corevalue
+from .models import PricingPlan,Service, Contact,Indexmanage,Servicemanage,Pricingmanage,Project,Contactmanage,Aboutmanage,User,About,Corevalue
 from django.contrib import messages
 from django.core.mail import send_mail
 
@@ -7,6 +7,8 @@ from django.core.mail import send_mail
 def home(request):
     servicesdetails = Service.objects.all()
     contactdetails = Contact.objects.first()
+    aboutdetails = About.objects.first()
+
     indexmanagedetails = Indexmanage.objects.first()
     projectdetails = Project.objects.all()
 
@@ -33,7 +35,9 @@ def home(request):
     return render(request, 'index.html',{'servicesdetails':servicesdetails,
                                          'projectdetails':projectdetails,
                                          'contactdetails':contactdetails,
-                                        'indexmanagedetails':indexmanagedetails})
+                                        'indexmanagedetails':indexmanagedetails,
+                                        'aboutdetails':aboutdetails
+                                        })
 
 def services(request):
     servicesdetails = Service.objects.all()
@@ -43,9 +47,11 @@ def services(request):
 
 def pricing(request):
     contactdetails = Contact.objects.first()
+    plans = PricingPlan.objects.all()
     pricingmanagedetails = Pricingmanage.objects.first()
     return render(request, 'pricing.html',{'contactdetails':contactdetails,
                                            'pricingmanagedetails':pricingmanagedetails,
+                                           'plans':plans
                                            })
 
 def about(request):
@@ -107,6 +113,7 @@ def adminpanel(request):
     pricingmanagedetails = Pricingmanage.objects.first()
     aboutmanagedetails = Aboutmanage.objects.first()
     contactmanagedetails = Contactmanage.objects.first()
+    plans = PricingPlan.objects.all()
     
 
     if request.method == 'POST':
@@ -146,10 +153,12 @@ def adminpanel(request):
              messages.error(request, "About details already exist. You can only edit or delete them.")
              return redirect('adminpanel')
             story = request.POST.get('story')
+            story2 = request.POST.get('story2')
+            about_image = request.FILES.get('about_image')
             experience = request.POST.get('experience')
             procom = request.POST.get('procom')
             satisfaction = request.POST.get('satisfaction')
-            About.objects.create(story=story, experience=experience, procom=procom, satisfaction=satisfaction)
+            About.objects.create(story=story,story2=story2, about_image=about_image, experience=experience, procom=procom, satisfaction=satisfaction)
             messages.success(request, 'About information saved successfully.')
             return redirect('adminpanel')
         
@@ -222,6 +231,22 @@ def adminpanel(request):
             Corevalue.objects.create(title=title, detail=detail, icon_class=icon_class)
             messages.success(request, 'Core value details saved successfully.')
             return redirect('adminpanel')
+        
+        elif form_type == "plan_form":
+            name = request.POST.get('name')
+            price = request.POST.get('price')
+            features = request.POST.get('features')
+            button_text = request.POST.get('button_text')
+            button_link = request.POST.get('button_link')
+            most_popular = request.POST.get('most_popular') == "True"
+
+            PricingPlan.objects.create(
+                name=name, price=price, features=features,
+                button_text=button_text, button_link=button_link,
+                most_popular=most_popular
+            )
+            messages.success(request, "Plan added successfully!")
+            return redirect('adminpanel')
 
     return render(request, 'adminpanel.html', {'servicesdetails': servicesdetails,
                                                'contactdetails':contactdetails,
@@ -233,6 +258,7 @@ def adminpanel(request):
                                                 'aboutmanagedetails':aboutmanagedetails,
                                                 'contactmanagedetails':contactmanagedetails,
                                                 'corevaluedetails': corevaluedetails,
+                                                'plans':plans
                                                 })
 
 def delete_service(request, service_id):
@@ -267,6 +293,10 @@ def edit_about(request):
     if aboutdetails:
        if request.method == 'POST':
         aboutdetails.story = request.POST.get('story')
+        aboutdetails.story2 = request.POST.get('story2')
+                    # Only update the image if a new one is uploaded
+        if 'about_image' in request.FILES:
+            aboutdetails.about_image = request.FILES.get('about_image')
         aboutdetails.experience = request.POST.get('experience')
         aboutdetails.procom = request.POST.get('procom')
         aboutdetails.satisfaction = request.POST.get('satisfaction')
@@ -531,3 +561,26 @@ def delete_project(request, id):
     projectdetails.delete()
     messages.success(request, 'Project details deleted Successfully.')
     return redirect('adminpanel')
+
+def edit_pricing_plan(request, plan_id):
+    plan = get_object_or_404(PricingPlan, id=plan_id)
+
+    if request.method == "POST":
+        plan.name = request.POST.get("name")
+        plan.price = request.POST.get("price")
+        plan.features = request.POST.get("features")
+        plan.button_text = request.POST.get("button_text")
+        plan.button_link = request.POST.get("button_link")
+        plan.most_popular = request.POST.get("most_popular") == "True"
+        
+        plan.save()
+        messages.success(request, "Plan updated successfully!")
+        return redirect("adminpanel")
+
+    return render(request, "edit_plans.html", {"plan": plan})
+
+def delete_pricing_plan(request, plan_id):
+    plan = get_object_or_404(PricingPlan, id=plan_id)
+    plan.delete()
+    messages.success(request, "Pricing plan deleted successfully!")
+    return redirect("adminpanel")
