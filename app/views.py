@@ -91,7 +91,7 @@ def admin_login(request):
     return render(request, 'adminpanellogin.html')
 
 
-
+// admin logout procedure
 def admin_logout(request):
     if 'user_id' in request.session:
         del request.session['user_id']  # Remove user ID from session
