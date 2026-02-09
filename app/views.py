@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.core.mail import send_mail
 
 # Create your views here.
+
 def home(request):
     servicesdetails = Service.objects.all()
     contactdetails = Contact.objects.first()
@@ -69,7 +70,7 @@ def contact(request):
     contactdetails = Contact.objects.first()
     contactmanagedetails = Contactmanage.objects.first()
     return render(request, 'contact.html' ,{'contactdetails':contactdetails, 'contactmanagedetails':contactmanagedetails,})
-
+#improved authentication system
 def admin_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
