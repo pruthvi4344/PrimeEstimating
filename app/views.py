@@ -65,11 +65,12 @@ def about(request):
                                           'aboutmanagedetails':aboutmanagedetails,
                                           'corevaluedetails': corevaluedetails
                                           } )
-
+// contact page function
 def contact(request):
     contactdetails = Contact.objects.first()
     contactmanagedetails = Contactmanage.objects.first()
     return render(request, 'contact.html' ,{'contactdetails':contactdetails, 'contactmanagedetails':contactmanagedetails,})
+    
 #improved authentication system
 def admin_login(request):
     if request.method == 'POST':
