@@ -262,7 +262,7 @@ def adminpanel(request):
                                                 'corevaluedetails': corevaluedetails,
                                                 'plans':plans
                                                 })
-
+# deleting the serive section view
 def delete_service(request, service_id):
     service = get_object_or_404(Service, id=service_id)
     service.delete()
