@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.core.mail import send_mail
 
 # Create your views here.
-
+#index page view
 def home(request):
     servicesdetails = Service.objects.all()
     contactdetails = Contact.objects.first()
