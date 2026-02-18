@@ -4,7 +4,7 @@ from django.db import models
 class User(models.Model):
    username = models.EmailField(max_length=100)
    password = models.CharField(max_length=50)
-   
+   // added entity to service model
 class Service(models.Model):
     name = models.CharField(max_length=50)
     detail = models.CharField(max_length=1000)
