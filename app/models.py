@@ -20,7 +20,7 @@ class Project(models.Model):
       return self
       
 
-
+// new entity added
 class About(models.Model):
    story = models.CharField(max_length=1000, blank=True, null=True)
    story2 = models.CharField(max_length=1000, blank=True, null=True)
