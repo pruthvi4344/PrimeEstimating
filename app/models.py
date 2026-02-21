@@ -12,6 +12,7 @@ class Service(models.Model):
     def __str__(self):
      return self.name
 
+// entity added to project model
 class Project(models.Model):
    name = models.CharField(max_length=50)
    detail = models.CharField(max_length=300)
