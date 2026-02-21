@@ -273,6 +273,7 @@ def delete_service(request, service_id):
 #     contact = get_object_or_404(Contact, id=contact_id)
 #     contact.delete()
 
+// improved edit section for services
 def edit_service(request, service_id):
     service = get_object_or_404(Service, id=service_id)
 
