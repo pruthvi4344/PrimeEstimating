@@ -40,6 +40,7 @@ def home(request):
                                         'aboutdetails':aboutdetails
                                         })
 
+# services section
 def services(request):
     servicesdetails = Service.objects.all()
     contactdetails = Contact.objects.first()
