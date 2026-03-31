@@ -73,6 +73,7 @@ def contact(request):
     return render(request, 'contact.html' ,{'contactdetails':contactdetails, 'contactmanagedetails':contactmanagedetails,})
     
 #improved authentication system
+# login system
 def admin_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
