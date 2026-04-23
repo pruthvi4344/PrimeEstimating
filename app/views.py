@@ -314,6 +314,7 @@ def edit_about(request):
         return redirect('adminpanel')
     return render(request, 'edit_about.html',{'aboutdetails':aboutdetails})
 
+# delete about page
 def delete_about(request):
     aboutdetails = About.objects.first()    
     if aboutdetails:
