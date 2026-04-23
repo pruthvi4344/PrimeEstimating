@@ -326,7 +326,7 @@ def delete_about(request):
     
 
 
-
+# edit contact
 def edit_contact(request):
     contact = Contact.objects.first()
     if contact: 
