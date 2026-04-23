@@ -293,6 +293,7 @@ def edit_service(request, service_id):
 
     return render(request, 'edit_service.html', {'service': service})
 
+# edit about page
 def edit_about(request):
     aboutdetails = About.objects.first()
     if aboutdetails:
