@@ -39,7 +39,8 @@ class Corevalue(models.Model):
    title = models.CharField(max_length=30)
    detail = models.CharField(max_length=300)
    icon_class = models.CharField(max_length=100, default="fas fa-cogs", blank=True, null=True)
-    
+
+# contact model
 class Contact(models.Model):
    email = models.CharField(max_length=50)
    contnum = models.CharField(max_length=50)
