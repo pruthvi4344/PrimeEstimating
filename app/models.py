@@ -54,6 +54,7 @@ class Indexmanage(models.Model):
     button_text = models.CharField(max_length=10)
     background_image = models.ImageField(upload_to='indexwelcome/', blank=True, null=True)
 
+# service section detail model
 class Servicemanage(models.Model):
     title = models.CharField(max_length=50)
     line = models.CharField(max_length=100)
