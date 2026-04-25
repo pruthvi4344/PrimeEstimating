@@ -34,6 +34,7 @@ class About(models.Model):
    detail = models.CharField(max_length=300, blank=True, null=True)
    icon_class = models.CharField(max_length=100, default="fas fa-cogs", blank=True, null=True)
 
+# core value model
 class Corevalue(models.Model):
    title = models.CharField(max_length=30)
    detail = models.CharField(max_length=300)
