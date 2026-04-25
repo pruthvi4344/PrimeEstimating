@@ -68,6 +68,7 @@ class Pricingmanage(models.Model):
     button_text = models.CharField(max_length=10)
     background_image = models.ImageField(upload_to='servicewelcome/', blank=True, null=True)
 
+# about index section detail model
 class Aboutmanage(models.Model):
     title = models.CharField(max_length=50)
     line = models.CharField(max_length=100)
