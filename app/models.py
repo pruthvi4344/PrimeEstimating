@@ -47,6 +47,7 @@ class Contact(models.Model):
    address = models.CharField(max_length=50)
    timing = models.CharField(max_length=50)
 
+# index hero section detail model
 class Indexmanage(models.Model):
     title = models.CharField(max_length=50)
     line = models.CharField(max_length=100)
