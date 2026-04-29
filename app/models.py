@@ -82,6 +82,7 @@ class Contactmanage(models.Model):
     button_text = models.CharField(max_length=10)
     background_image = models.ImageField(upload_to='contactwelcome/', blank=True, null=True)
 
+# pricing plan index section deatil model
 class PricingPlan(models.Model):
     name = models.CharField(max_length=100)
     price = models.CharField(max_length=50, help_text="Use 'Custom' for variable pricing")
