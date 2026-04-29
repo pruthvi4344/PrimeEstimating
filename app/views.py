@@ -47,6 +47,7 @@ def services(request):
     servicemanagedetails = Servicemanage.objects.first()
     return render(request, 'services.html',{'servicesdetails':servicesdetails,'contactdetails':contactdetails,'servicemanagedetails':servicemanagedetails} )
 
+# pricing function
 def pricing(request):
     contactdetails = Contact.objects.first()
     plans = PricingPlan.objects.all()
