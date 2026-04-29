@@ -75,6 +75,7 @@ class Aboutmanage(models.Model):
     button_text = models.CharField(max_length=10)
     background_image = models.ImageField(upload_to='aboutwelcome/', blank=True, null=True)
 
+# contact index section detail model
 class Contactmanage(models.Model):
     title = models.CharField(max_length=50)
     line = models.CharField(max_length=100)
