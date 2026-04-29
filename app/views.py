@@ -56,7 +56,7 @@ def pricing(request):
                                            'pricingmanagedetails':pricingmanagedetails,
                                            'plans':plans
                                            })
-//this call the about page
+# this call the about page
 def about(request):
     corevaluedetails = Corevalue.objects.all()
     contactdetails = Contact.objects.first()
