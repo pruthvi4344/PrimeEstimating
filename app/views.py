@@ -67,7 +67,7 @@ def about(request):
                                           'aboutmanagedetails':aboutmanagedetails,
                                           'corevaluedetails': corevaluedetails
                                           } )
-// contact page function
+# contact page function
 def contact(request):
     contactdetails = Contact.objects.first()
     contactmanagedetails = Contactmanage.objects.first()
