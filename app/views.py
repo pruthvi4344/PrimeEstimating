@@ -103,7 +103,7 @@ def admin_logout(request):
     messages.success(request, 'Logged-out successfully.')
     return redirect('admin_login')
 
-// adminpanel function
+ # adminpanel function
 def adminpanel(request):
     if 'user_id' not in request.session:  # Check if user is logged in
         messages.error(request, 'You need to login.')
