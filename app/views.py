@@ -124,6 +124,7 @@ def adminpanel(request):
     if request.method == 'POST':
         form_type = request.POST.get('form_type')
 
+        # contact details record
         if form_type == 'contact_form':
             if contactdetails:
              messages.error(request, "Contact details already exist. You can only edit or delete them.")
