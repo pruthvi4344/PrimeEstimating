@@ -138,6 +138,7 @@ def adminpanel(request):
             messages.success(request, 'Contact details updated')
             return redirect('adminpanel')
 
+        # service detail record
         elif form_type == 'service_form':
             name = request.POST.get('title')
             detail = request.POST.get('detail')
