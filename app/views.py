@@ -155,7 +155,8 @@ def adminpanel(request):
             Project.objects.create(name=name, detail=detail, proimg=proimg)
             messages.success(request, 'Project added')
             return redirect('adminpanel')
-        
+
+        # about details record
         elif form_type == 'about_form':
             if aboutdetails:
              messages.error(request, "About details already exist. You can only edit or delete them.")
