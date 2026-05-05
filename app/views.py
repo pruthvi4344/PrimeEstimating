@@ -209,7 +209,8 @@ def adminpanel(request):
             Pricingmanage.objects.create(title=title, line=line, button_text=button_text, background_image=background_image)
             messages.success(request, 'Pricing page details saved successfully.')
             return redirect('adminpanel')
-        
+
+        # about manage detail record
         elif form_type == 'aboutmanage_form':
             if aboutmanagedetails:
              messages.error(request, "About welcome details already exist. You can only edit or delete them.")
