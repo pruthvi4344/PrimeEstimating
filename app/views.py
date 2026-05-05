@@ -196,7 +196,8 @@ def adminpanel(request):
             Servicemanage.objects.create(title=title, line=line, button_text=button_text, background_image=background_image)
             messages.success(request, 'Service page details saved successfully.')
             return redirect('adminpanel')
-        
+
+        # pricing manage record deatils
         elif form_type == 'pricingmanage_form':
             if pricingmanagedetails:
              messages.error(request, "Pricing welcome details already exist. You can only edit or delete them.")
