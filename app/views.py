@@ -183,7 +183,8 @@ def adminpanel(request):
             Indexmanage.objects.create(title=title, line=line, button_text=button_text, background_image=background_image)
             messages.success(request, 'Home page details saved successfully.')
             return redirect('adminpanel')
-        
+
+        # service manage detail record
         elif form_type == 'servicemanage_form':
             if servicemanagedetails:
              messages.error(request, "Service welcome details already exist. You can only edit or delete them.")
