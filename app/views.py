@@ -146,7 +146,8 @@ def adminpanel(request):
             Service.objects.create(name=name, detail=detail, icon_class=icon_class)
             messages.success(request, 'Service added')
             return redirect('adminpanel')
-        
+            
+        # project detail record
         elif form_type == 'project_form':
             name = request.POST.get('name')
             detail = request.POST.get('detail')
