@@ -171,7 +171,7 @@ def adminpanel(request):
             messages.success(request, 'About information saved successfully.')
             return redirect('adminpanel')
         
-        
+        # index manage record detail
         elif form_type == 'indexmanage_form':
             if indexmanagedetails:
              messages.error(request, "Index welcome details already exist. You can only edit or delete them.")
