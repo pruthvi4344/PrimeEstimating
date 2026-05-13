@@ -358,6 +358,7 @@ def edit_contact(request):
         return redirect('adminpanel')
     return render(request, 'edit_contact.html', {'contact': contact})
 
+# delete contact detail section
 def delete_contact(request):
     contact = Contact.objects.first()  # Fetch the single contact
     print(contact)
