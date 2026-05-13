@@ -222,7 +222,8 @@ def adminpanel(request):
             Aboutmanage.objects.create(title=title, line=line, button_text=button_text, background_image=background_image)
             messages.success(request, 'About page details saved successfully.')
             return redirect('adminpanel')
-        
+
+        # contact manage detail 
         elif form_type == 'contactmanage_form':
             if contactmanagedetails:
              messages.error(request, "Contact welcome details already exist. You can only edit or delete them.")
