@@ -245,7 +245,8 @@ def adminpanel(request):
             Corevalue.objects.create(title=title, detail=detail, icon_class=icon_class)
             messages.success(request, 'Core value details saved successfully.')
             return redirect('adminpanel')
-        
+
+        # plan details section
         elif form_type == "plan_form":
             name = request.POST.get('name')
             price = request.POST.get('price')
