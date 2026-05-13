@@ -235,7 +235,8 @@ def adminpanel(request):
             Contactmanage.objects.create(title=title, line=line, button_text=button_text, background_image=background_image)
             messages.success(request, 'Contact page details saved successfully.')
             return redirect('adminpanel')
-        
+
+        # core values details
         elif form_type == 'corevalue_form':
             
             title = request.POST.get('title')
